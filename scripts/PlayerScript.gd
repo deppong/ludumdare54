@@ -49,3 +49,5 @@ func _physics_process(delta):
 	actions()
 	movement()
 	
+func player_take_damage():
+	print_debug("Player hit")

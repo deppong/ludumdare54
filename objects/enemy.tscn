@@ -18,3 +18,9 @@ shape = SubResource("CapsuleShape2D_iq1kk")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.792969, 0.792969)
 texture = ExtResource("2_3fmat")
+
+[node name="attack_timer" type="Timer" parent="."]
+wait_time = 3.0
+autostart = true
+
+[connection signal="timeout" from="attack_timer" to="." method="_on_attack_timer_timeout"]

@@ -1,26 +1,244 @@
-[gd_scene load_steps=4 format=3 uid="uid://bxkkhf5uta8kp"]
+[gd_scene load_steps=9 format=3 uid="uid://dgmixdjaa18m"]
 
 [ext_resource type="Texture2D" uid="uid://cph1qfbbhpa78" path="res://art/icon.svg" id="1_1xmhw"]
-[ext_resource type="Script" path="res://scripts/enemy_beam.gd" id="1_us77q"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_mu50t"]
-size = Vector2(329, 20)
+[sub_resource type="GDScript" id="GDScript_1688m"]
+script/source = "extends Node2D
 
-[node name="beam" type="Area2D"]
-collision_mask = 3
-script = ExtResource("1_us77q")
+# Called when the node enters the scene tree for the first time.
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(154.5, 0)
-shape = SubResource("RectangleShape2D_mu50t")
-disabled = true
+# TODO: make animation for enemy beam
+func _ready():
+	var anim: AnimationPlayer = $Area2D/AnimationPlayer
+	anim.play(\"enemy_beam_flicker\")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(154.5, 9.53674e-07)
-scale = Vector2(2.57031, 0.15625)
-texture = ExtResource("1_1xmhw")
 
-[node name="Timer" type="Timer" parent="."]
-one_shot = true
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta):
+	pass
 
-[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+
+func check_bodies():
+	if($Area2D.has_overlapping_bodies()):
+		var overlap = $Area2D.get_overlapping_bodies() #node2d array
+		for item in overlap:
+			if(item.has_method(\"player_take_damage\")):
+				item.player_take_damage()
+	
+"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2wk25"]
+size = Vector2(130, 127)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_erhro"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_1xmhw")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="Animation" id="Animation_px7sy"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate:r")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:modulate:g")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:modulate:b")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/3/type = "bezier"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".:modulate:a")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+
+[sub_resource type="Animation" id="Animation_ghkfr"]
+resource_name = "player_beam_fadeOut"
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate:r")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 1)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:modulate:g")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 1, 1.0001)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:modulate:b")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 1)
+}
+tracks/3/type = "bezier"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".:modulate:a")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 1)
+}
+tracks/4/type = "method"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath(".")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(1),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"queue_free"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_sypgi"]
+resource_name = "enemy_beam_flicker"
+length = 1.3
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.894569, 1.17737),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"check_bodies"
+}, {
+"args": [],
+"method": &"queue_free"
+}]
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:modulate:r")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0.00102138, 0.997888)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:modulate:g")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.998909)
+}
+tracks/3/type = "bezier"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".:modulate:b")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.998909)
+}
+tracks/4/type = "bezier"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath(".:modulate:a")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.0112848, 0.0191559, 0.364762, 0, -0.00162894, 0, 0.00640014, 0.140758, 0, 0.0127558, 0.000719398, 0.0319561, 0.460763, -0.00102139, 0, 0.00306414, -0.00640005, 0.25596, 0, -0.00162894, 0, 0.00640014, 0.563165, 0, 0.0127558, 0.000719398, 0.0319561, 0.422363, -0.00102139, 0, 0.00306414, -0.00640005, 0.742368, -0.000121951, -0.00644446, 0.000268221, 0.0127559, 0.467163, 0, -0.00162894, 0, 0.00640014, 0.729567, 0, 0.0127558, 0.000719398, 0.0319561, 0.582365, -0.00102139, 0, 0.00306414, -0.00640005, 0.86397, 0, -0.00162894, 0, 0.00640014, 0.601566, -0.00102139, 0, 0.00306414, -0.00640005, 0.90877, 0, 0.0127558, 0.000719398, 0.0319561, 0.115158, -0.119696, 0.0128002, 0.831343, -0.121602, 0.985571, -0.000121951, -0.00644446, 0.000268221, 0.0127559, 0.985571, 0, 0.0128002, 0.00886416, -0.787212, 0.051157, -0.00408554, 0.00640011, 0.25, 0),
+"times": PackedFloat32Array(0, 0.0544073, 0.100102, 0.130577, 0.158869, 0.198042, 0.243745, 0.282925, 0.302504, 0.341678, 0.385203, 0.413495, 0.450492, 0.470079, 0.7595, 0.881398, 0.945745, 1.29489)
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_63hkf"]
+_data = {
+"RESET": SubResource("Animation_px7sy"),
+"enemy_beam_flicker": SubResource("Animation_sypgi"),
+"player_beam_fadeOut": SubResource("Animation_ghkfr")
+}
+
+[node name="EnemyBeam" type="Node2D"]
+scale = Vector2(35.8, 1)
+script = SubResource("GDScript_1688m")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(64.9998, -0.500005)
+shape = SubResource("RectangleShape2D_2wk25")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Area2D"]
+sprite_frames = SubResource("SpriteFrames_erhro")
+offset = Vector2(64.0196, 2)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Area2D"]
+root_node = NodePath("../..")
+libraries = {
+"": SubResource("AnimationLibrary_63hkf")
+}
