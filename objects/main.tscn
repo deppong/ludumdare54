@@ -1,11 +1,10 @@
-[gd_scene load_steps=11 format=3 uid="uid://djdtyl7tf3634"]
+[gd_scene load_steps=9 format=3 uid="uid://djdtyl7tf3634"]
 
 [ext_resource type="Texture2D" uid="uid://dxhalnmmgdv32" path="res://art/adam.png" id="1_11q0t"]
 [ext_resource type="PackedScene" uid="uid://dogmmm25rvd6e" path="res://objects/player.tscn" id="1_e41k3"]
 [ext_resource type="Texture2D" uid="uid://cph1qfbbhpa78" path="res://art/icon.svg" id="1_vre6o"]
 [ext_resource type="PackedScene" uid="uid://c76ljtfxo7xq2" path="res://objects/enemy.tscn" id="3_u6leu"]
 [ext_resource type="Texture2D" uid="uid://bxw7bilofm5t8" path="res://art/mask.png" id="4_m1a6k"]
-[ext_resource type="Script" path="res://scripts/enemy_spawner.gd" id="6_kpugh"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bhvtb"]
 size = Vector2(515, 508)
@@ -16,13 +15,7 @@ size = Vector2(9.95556, 144.213)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_c1d60"]
 size = Vector2(146.204, 8.81778)
 
-[sub_resource type="Curve2D" id="Curve2D_nybnm"]
-_data = {
-"points": PackedVector2Array(0, 0, 0, 0, 5, 6, 0, 0, 0, 0, 1922, 4, 0, 0, 0, 0, 1927, 1082, 0, 0, 0, 0, 10, 1082, 0, 0, 0, 0, 5, 6)
-}
-point_count = 5
-
-[node name="main" type="Node2D"]
+[node name="Node2D" type="Node2D"]
 
 [node name="Sprite2D2" type="Sprite2D" parent="."]
 modulate = Color(1, 1, 1, 0.207843)
@@ -74,26 +67,9 @@ position = Vector2(947, 555)
 scale = Vector2(0.5, 0.5)
 
 [node name="enemy" parent="." instance=ExtResource("3_u6leu")]
-visibility_layer = 2
 position = Vector2(277, 303)
 
 [node name="mask" type="Sprite2D" parent="."]
 position = Vector2(964, 544.5)
 scale = Vector2(4.01667, 4.01111)
 texture = ExtResource("4_m1a6k")
-
-[node name="enemy_spawner" type="Node" parent="."]
-script = ExtResource("6_kpugh")
-enemy_tscn = ExtResource("3_u6leu")
-
-[node name="spawn_timer" type="Timer" parent="enemy_spawner"]
-autostart = true
-
-[node name="spawn_path" type="Path2D" parent="enemy_spawner"]
-curve = SubResource("Curve2D_nybnm")
-
-[node name="spawn_point" type="PathFollow2D" parent="enemy_spawner/spawn_path"]
-position = Vector2(5, 6)
-rotation = -0.0010433
-
-[connection signal="timeout" from="enemy_spawner/spawn_timer" to="enemy_spawner" method="_on_spawn_timer_timeout"]

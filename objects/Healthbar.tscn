@@ -1,0 +1,43 @@
+[gd_scene load_steps=3 format=3 uid="uid://dpyrrbgtxw415"]
+
+[ext_resource type="Script" path="res://objects/Healthbar.gd" id="1_k8i0f"]
+[ext_resource type="Theme" uid="uid://op5u1dllwjr1" path="res://art/Healthbar.tres" id="2_k2or6"]
+
+[node name="Healthbar" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_k8i0f")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_right = 260.0
+offset_bottom = 56.0
+alignment = 1
+
+[node name="ProgressBar" type="ProgressBar" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("2_k2or6")
+max_value = 3.0
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.12
+
+[node name="RichTextLabel" type="RichTextLabel" parent="VBoxContainer/MarginContainer"]
+clip_contents = false
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_colors/font_selected_color = Color(1, 1, 1, 1)
+theme_override_colors/selection_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/normal_font_size = 25
+bbcode_enabled = true
+text = "[center]health[/center]"
+scroll_active = false
+tab_size = 3
