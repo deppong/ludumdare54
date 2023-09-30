@@ -1,7 +1,57 @@
-[gd_scene load_steps=2 format=3 uid="uid://djdtyl7tf3634"]
+[gd_scene load_steps=6 format=3 uid="uid://djdtyl7tf3634"]
 
 [ext_resource type="PackedScene" uid="uid://351s23bksmsh" path="res://objects/player.tscn" id="1_e41k3"]
+[ext_resource type="Texture2D" uid="uid://cph1qfbbhpa78" path="res://art/icon.svg" id="1_vre6o"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bhvtb"]
+size = Vector2(515, 508)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nkreq"]
+size = Vector2(9.95556, 144.213)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_c1d60"]
+size = Vector2(146.204, 8.81778)
 
 [node name="Node2D" type="Node2D"]
 
+[node name="BackgroundPlayArea" type="Sprite2D" parent="."]
+modulate = Color(0.580392, 0.290196, 0, 1)
+position = Vector2(947, 557)
+scale = Vector2(3.51563, 3.51563)
+texture = ExtResource("1_vre6o")
+
+[node name="PlayArea" type="Area2D" parent="BackgroundPlayArea"]
+position = Vector2(-269.369, -158.436)
+scale = Vector2(0.284444, 0.284444)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BackgroundPlayArea/PlayArea"]
+position = Vector2(942.5, 561)
+shape = SubResource("RectangleShape2D_bhvtb")
+
+[node name="Vert_left" type="StaticBody2D" parent="BackgroundPlayArea"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BackgroundPlayArea/Vert_left"]
+position = Vector2(-69.12, -0.142227)
+shape = SubResource("RectangleShape2D_nkreq")
+
+[node name="Vert_right" type="StaticBody2D" parent="BackgroundPlayArea"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BackgroundPlayArea/Vert_right"]
+position = Vector2(67.4133, -0.142227)
+shape = SubResource("RectangleShape2D_nkreq")
+
+[node name="Horiz_top" type="StaticBody2D" parent="BackgroundPlayArea"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BackgroundPlayArea/Horiz_top"]
+position = Vector2(-0.853333, -67.1289)
+shape = SubResource("RectangleShape2D_c1d60")
+
+[node name="Horiz_bottom" type="StaticBody2D" parent="BackgroundPlayArea"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BackgroundPlayArea/Horiz_bottom"]
+position = Vector2(-0.711121, 67.4133)
+shape = SubResource("RectangleShape2D_c1d60")
+
 [node name="Player" parent="." instance=ExtResource("1_e41k3")]
+position = Vector2(947, 555)
+scale = Vector2(0.5, 0.5)
