@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://351s23bksmsh"]
+[gd_scene load_steps=5 format=3 uid="uid://dogmmm25rvd6e"]
 
 [ext_resource type="Script" path="res://objects/PlayerScript.gd" id="1_2mwt2"]
 [ext_resource type="Texture2D" uid="uid://cph1qfbbhpa78" path="res://art/icon.svg" id="1_gsp6n"]
@@ -17,6 +17,7 @@ animations = [{
 }]
 
 [node name="Player" type="CharacterBody2D"]
+collision_layer = 3
 motion_mode = 1
 script = ExtResource("1_2mwt2")
 speed = 300.0
