@@ -5,6 +5,8 @@ extends CharacterBody2D
 @export var deccel: float = .2
 @export var initalSpd: float = .2
 
+var pinging: bool = false
+
 var beam = preload("res://objects/player_beam.tscn")
 
 var vel: Vector2
@@ -19,6 +21,10 @@ func _process(delta):
 	
 	
 func movement():
+	# player can't process movement code if pinging
+	if (pinging):
+		return
+	
 	var dir = Input.get_vector("MoveLeft","MoveRight","MoveUp","MoveDown") 
 	dir = dir.normalized()
 	if(dir.x != 0):
@@ -46,8 +52,10 @@ func actions():
 	
 	if (Input.is_action_just_pressed("Radar")):
 		$RadarCharge.start()
+		pinging = true
 	if (Input.is_action_just_released("Radar")):
 		$RadarCharge.stop()
+		pinging = false
 
 func radar():
 	var enemies = get_tree().get_nodes_in_group("enemy")

@@ -222,7 +222,7 @@ _data = {
 }
 
 [node name="EnemyBeam" type="Node2D"]
-scale = Vector2(35.8, 1)
+scale = Vector2(35.8, 0.36)
 script = SubResource("GDScript_1688m")
 
 [node name="Area2D" type="Area2D" parent="."]
