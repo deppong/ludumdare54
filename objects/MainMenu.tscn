@@ -1,0 +1,141 @@
+[gd_scene load_steps=3 format=3 uid="uid://cwwh873b1oseu"]
+
+[ext_resource type="Script" path="res://scripts/MainMenu.gd" id="1_5dtjb"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bqx42"]
+bg_color = Color(0.247059, 0.247059, 0.247059, 1)
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_5dtjb")
+
+[node name="Canvas" type="CanvasLayer" parent="."]
+
+[node name="Panel" type="Panel" parent="Canvas"]
+custom_minimum_size = Vector2(1920, 1080)
+offset_right = 1920.0
+offset_bottom = 1080.0
+
+[node name="MarginContainer" type="MarginContainer" parent="Canvas/Panel"]
+custom_minimum_size = Vector2(1920, 1080)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 100
+theme_override_constants/margin_top = 100
+theme_override_constants/margin_right = 100
+theme_override_constants/margin_bottom = 100
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Canvas/Panel/MarginContainer"]
+custom_minimum_size = Vector2(800, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_constants/separation = 90
+
+[node name="MarginContainer" type="MarginContainer" parent="Canvas/Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_top = 120
+theme_override_constants/margin_bottom = 120
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Canvas/Panel/MarginContainer/VBoxContainer/MarginContainer"]
+custom_minimum_size = Vector2(1200, 0)
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 120
+bbcode_enabled = true
+text = "[center]Name of this game[/center]
+"
+fit_content = true
+
+[node name="MarginContainer2" type="MarginContainer" parent="Canvas/Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 100
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Canvas/Panel/MarginContainer/VBoxContainer/MarginContainer2"]
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="PlayBtn" type="Button" parent="Canvas/Panel/MarginContainer/VBoxContainer/MarginContainer2/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_pressed_color = Color(0.533333, 0.533333, 0.533333, 1)
+theme_override_colors/font_hover_color = Color(0.752941, 0.752941, 0.752941, 1)
+theme_override_font_sizes/font_size = 40
+text = "Play the damn game"
+alignment = 0
+
+[node name="HowToBtn" type="Button" parent="Canvas/Panel/MarginContainer/VBoxContainer/MarginContainer2/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_colors/font_pressed_color = Color(0.533333, 0.533333, 0.533333, 1)
+theme_override_colors/font_hover_color = Color(0.752941, 0.752941, 0.752941, 1)
+theme_override_font_sizes/font_size = 40
+text = "How to Play
+"
+alignment = 0
+
+[node name="Label2" type="Label" parent="Canvas/Panel/MarginContainer/VBoxContainer/MarginContainer2/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.298039, 0.298039, 0.298039, 1)
+theme_override_font_sizes/font_size = 40
+text = "Created for LD 54 by AV, ID, RW"
+
+[node name="HowToPanel" type="Panel" parent="Canvas"]
+visible = false
+anchors_preset = -1
+anchor_left = 0.05
+anchor_top = 0.05
+anchor_right = 0.95
+anchor_bottom = 0.95
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_bqx42")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Canvas/HowToPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label2" type="Label" parent="Canvas/HowToPanel/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 86
+text = "How to play:"
+
+[node name="MarginContainer2" type="MarginContainer" parent="Canvas/HowToPanel/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 80
+
+[node name="Label" type="Label" parent="Canvas/HowToPanel/VBoxContainer/MarginContainer2"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 51
+text = "You play the game
+that is how
+you play the game
+
+eazy lol !!!!! play video game"
+
+[node name="CloseHowToBtn" type="Button" parent="Canvas/HowToPanel"]
+layout_mode = 0
+offset_left = 1552.0
+offset_top = 869.0
+offset_right = 1691.0
+offset_bottom = 947.0
+theme_override_colors/font_pressed_color = Color(0.533333, 0.533333, 0.533333, 1)
+theme_override_colors/font_hover_color = Color(0.752941, 0.752941, 0.752941, 1)
+theme_override_font_sizes/font_size = 51
+text = "Close"
+
+[connection signal="pressed" from="Canvas/Panel/MarginContainer/VBoxContainer/MarginContainer2/VBoxContainer/PlayBtn" to="." method="StartGame"]
+[connection signal="pressed" from="Canvas/Panel/MarginContainer/VBoxContainer/MarginContainer2/VBoxContainer/HowToBtn" to="." method="OpenHowTo"]
+[connection signal="pressed" from="Canvas/HowToPanel/CloseHowToBtn" to="." method="CloseHowTo"]
