@@ -30,3 +30,8 @@ shape = SubResource("CircleShape2D_tsxkm")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_mist4")
+
+[node name="RadarCharge" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="timeout" from="RadarCharge" to="." method="radar"]

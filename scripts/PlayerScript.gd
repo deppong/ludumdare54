@@ -45,11 +45,16 @@ func actions():
 		beamInst.rotation = get_angle_to(get_global_mouse_position())
 	
 	if (Input.is_action_just_pressed("Radar")):
-		var enemies = get_tree().get_nodes_in_group("enemy")
+		$RadarCharge.start()
+	if (Input.is_action_just_released("Radar")):
+		$RadarCharge.stop()
+
+func radar():
+	var enemies = get_tree().get_nodes_in_group("enemy")
 		
-		for enemy in enemies:
-			if enemy.has_method("radar_ping"):
-				enemy.radar_ping()
+	for enemy in enemies:
+		if enemy.has_method("radar_ping"):
+			enemy.radar_ping()
 
 func _physics_process(delta):
 	actions()
