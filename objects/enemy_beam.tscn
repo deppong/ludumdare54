@@ -222,6 +222,8 @@ _data = {
 }
 
 [node name="EnemyBeam" type="Node2D"]
+visibility_layer = 2
+z_index = -1
 scale = Vector2(35.8, 0.36)
 script = SubResource("GDScript_1688m")
 

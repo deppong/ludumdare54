@@ -4,6 +4,7 @@ extends CharacterBody2D
 @export var accel: float = .1
 @export var deccel: float = .2
 @export var initalSpd: float = .2
+@export var health: int = 3
 
 var pinging: bool = false
 
@@ -59,7 +60,7 @@ func actions():
 
 func radar():
 	var enemies = get_tree().get_nodes_in_group("enemy")
-		
+	
 	for enemy in enemies:
 		if enemy.has_method("radar_ping"):
 			enemy.radar_ping()
@@ -69,4 +70,8 @@ func _physics_process(delta):
 	movement()
 	
 func player_take_damage():
-	print_debug("Player hit")
+	health-=1
+	print_debug("Player hit health: ", health)
+	
+	if (health == 0):
+		print_debug("Game is over dude")
