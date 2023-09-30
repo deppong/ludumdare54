@@ -26,9 +26,9 @@ func _process(delta):
 
 func fire(direction: Vector2):
 	var beamInst = beam.instantiate()
-	beamInst.position = position
+	#beamInst.position = position
 	beamInst.rotation = get_angle_to(direction)
-	get_parent().add_child(beamInst)
+	add_child(beamInst)
 
 func _on_attack_timer_timeout():
 	fire(player.position)
