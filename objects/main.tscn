@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://djdtyl7tf3634"]
 
-[ext_resource type="Texture2D" uid="uid://dxhalnmmgdv32" path="res://art/adam.png" id="1_11q0t"]
+[ext_resource type="Texture2D" uid="uid://xg26f4caorc5" path="res://art/bg.png" id="1_7xswj"]
 [ext_resource type="PackedScene" uid="uid://dogmmm25rvd6e" path="res://objects/player.tscn" id="1_e41k3"]
 [ext_resource type="Texture2D" uid="uid://cph1qfbbhpa78" path="res://art/icon.svg" id="1_vre6o"]
 [ext_resource type="PackedScene" uid="uid://c76ljtfxo7xq2" path="res://objects/enemy.tscn" id="3_u6leu"]
@@ -18,10 +18,9 @@ size = Vector2(146.204, 8.81778)
 [node name="Node2D" type="Node2D"]
 
 [node name="Sprite2D2" type="Sprite2D" parent="."]
-modulate = Color(1, 1, 1, 0.207843)
-position = Vector2(988, 584.5)
-scale = Vector2(2.525, 2.65)
-texture = ExtResource("1_11q0t")
+position = Vector2(940, 552)
+scale = Vector2(2.30859, 2.12695)
+texture = ExtResource("1_7xswj")
 
 [node name="BackgroundPlayArea" type="Sprite2D" parent="."]
 visible = false
