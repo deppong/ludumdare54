@@ -5,10 +5,12 @@ extends CharacterBody2D
 @export var deccel: float = .2
 @export var initalSpd: float = .2
 
+var beam = preload("res://objects/player_beam.tscn")
+
 var vel: Vector2
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	pass
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -16,8 +18,7 @@ func _process(delta):
 	pass
 	
 	
-
-func _physics_process(delta):
+func movement():
 	var dir = Input.get_vector("MoveLeft","MoveRight","MoveUp","MoveDown") 
 	dir = dir.normalized()
 	if(dir.x != 0):
@@ -35,3 +36,16 @@ func _physics_process(delta):
 		vel.y = lerp(vel.y,0.0,deccel )
 	velocity = vel * speed
 	move_and_slide()
+
+func actions():
+	if(Input.is_action_just_pressed("Fire")):
+		var beamInst:Node2D = beam.instantiate()
+		get_parent().add_child(beamInst)
+		beamInst.position = position
+		beamInst.rotation = get_angle_to(get_global_mouse_position())
+	pass
+
+func _physics_process(delta):
+	actions()
+	movement()
+	
