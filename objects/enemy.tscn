@@ -7,7 +7,7 @@
 radius = 51.0
 height = 104.0
 
-[node name="CharacterBody2D" type="CharacterBody2D"]
+[node name="Enemy" type="CharacterBody2D" groups=["enemy"]]
 script = ExtResource("1_n6urs")
 min = -22
 max = 22

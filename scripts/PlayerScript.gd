@@ -38,12 +38,18 @@ func movement():
 	move_and_slide()
 
 func actions():
-	if(Input.is_action_just_pressed("Fire")):
+	if (Input.is_action_just_pressed("Fire")):
 		var beamInst:Node2D = beam.instantiate()
 		get_parent().add_child(beamInst)
 		beamInst.position = position
 		beamInst.rotation = get_angle_to(get_global_mouse_position())
-	pass
+	
+	if (Input.is_action_just_pressed("Radar")):
+		var enemies = get_tree().get_nodes_in_group("enemy")
+		
+		for enemy in enemies:
+			if enemy.has_method("radar_ping"):
+				enemy.radar_ping()
 
 func _physics_process(delta):
 	actions()

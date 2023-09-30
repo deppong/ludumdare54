@@ -6,6 +6,7 @@ extends CharacterBody2D
 @onready var player = get_player()
 
 var beam = preload("res://objects/enemy_beam.tscn")
+var ping = preload("res://objects/ping.tscn")
 
 # Helper script in case the player is completely missing from the scene
 func get_player():
@@ -17,11 +18,11 @@ func get_player():
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	velocity = Vector2(randf_range(min, max), randf_range(min, max))
+	velocity = velocity * 3
 	pass # Replace with function body.
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	
 	move_and_slide()
 
 func fire(direction: Vector2):
@@ -33,3 +34,9 @@ func fire(direction: Vector2):
 func _on_attack_timer_timeout():
 	fire(player.position)
 
+
+func radar_ping():
+	var pingInst = ping.instantiate()
+	pingInst.position = position
+	get_parent().add_child(pingInst)
+	
