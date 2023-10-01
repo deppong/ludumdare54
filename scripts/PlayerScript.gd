@@ -91,5 +91,16 @@ func player_take_damage():
 	
 	if (health == 0):
 		print_debug("Game is over dude")
+		dead()
 
 
+func dead():
+	var fadeout = get_parent().get_node("EndParticle/FadeoutBg")
+	fadeout.show()
+	get_parent().get_node("EndParticle").emitting = true
+	var anim: AnimationPlayer = fadeout.get_node("FadeAnim")
+	anim.play("end_fade_out")
+	
+
+func showGameOverMenu():
+	get_parent().get_node("GameOverPanel").show()
