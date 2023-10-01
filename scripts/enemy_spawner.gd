@@ -3,7 +3,7 @@ extends Node
 # TODO change to static res:// path
 var enemy_tscn = preload("res://objects/enemy.tscn")
 var mortar_enemy_tcsn = preload("res://objects/mortar_enemy.tscn")
-@export var melee_enemy_tcsn: PackedScene
+var melee_enemy_tcsn = preload("res://objects/melee_enemy.tscn")
 
 enum enemy_types {BEAM, MORTAR, MELEE}
 
@@ -29,14 +29,15 @@ func _process(_delta):
 	enemy_count = len(enemies)
 	
 	if 0 <= score && score < 10:
-		pass
-	elif 10 <= score && score < 20:
-		
+		enemy_cap = 1
+	elif 10 <= score && score < 15:
+		enemy_cap = 3
 		$spawn_timer.wait_time = 5.0
-	elif 20 <= score && score < 30:
+	elif 15 <= score && score < 30:
 		can_spawn_mortar = true
 	elif 30 <= score && score < 40:
 		enemy_cap = 10
+		can_spawn_melee = true
 
 func increase_score(reward):
 	score+=reward
@@ -52,7 +53,9 @@ func spawn_enemy(type):
 			enemy.position = $spawn_path/spawn_point.position
 			print_debug("instantiate mortar enemy")
 		enemy_types.MELEE:
-			pass
+			enemy = melee_enemy_tcsn.instantiate()
+			$spawn_path/spawn_point.progress_ratio = randf()
+			enemy.position = $spawn_path/spawn_point.position
 		_:
 			enemy = enemy_tscn.instantiate()
 			if (randi_range(0, 1) == 1):
@@ -70,4 +73,5 @@ func _on_spawn_timer_timeout():
 	if can_spawn_mortar:
 		types_to_spawn.append(enemy_types.MORTAR)
 	
-	spawn_enemy(types_to_spawn[randi() % len(types_to_spawn)])
+	#spawn_enemy(types_to_spawn[randi() % len(types_to_spawn)])
+	spawn_enemy(enemy_types.MELEE)

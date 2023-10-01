@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://capq8fxl3btg6"]
+[gd_scene load_steps=4 format=3 uid="uid://mw0rmemav6x7"]
 
 [ext_resource type="Script" path="res://scripts/melee_enemy.gd" id="1_vbut2"]
 [ext_resource type="Texture2D" uid="uid://cph1qfbbhpa78" path="res://art/icon.svg" id="2_a2ksa"]
@@ -8,14 +8,13 @@ radius = 51.0
 height = 104.0
 
 [node name="melee_enemy" type="CharacterBody2D" groups=["enemy"]]
-collision_layer = 5
-collision_mask = 5
+collision_layer = 6
+collision_mask = 6
 script = ExtResource("1_vbut2")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_iq1kk")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-visible = false
 scale = Vector2(0.792969, 0.792969)
 texture = ExtResource("2_a2ksa")

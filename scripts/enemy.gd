@@ -50,5 +50,5 @@ func enemy_take_damage():
 	get_parent().add_child(part)
 	part.position = position
 	part.emitting = true
-	enemy_died.emit(2)
+	enemy_died.emit(10)
 	queue_free()
