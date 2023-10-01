@@ -4,8 +4,8 @@ extends CharacterBody2D
 @onready var center_pos = get_parent().get_node("BackgroundPlayArea").position
 
 var d = 0.0
-@export var radius = randf_range(350.0, 1300)
-@export var speed = randf_range(0.5, 1.0)
+var radius := randf_range(350.0, 1300)
+var speed := randf_range(0.5, 1.0)
 
 signal enemy_died(score)
 
@@ -24,18 +24,15 @@ func get_player():
 func _ready():
 	pass
 
-func _process(delta):
-	d+= delta
-	
-	position = Vector2 (sin(d * speed) * radius, cos(d * speed) * radius) + center_pos
+func _physics_process(delta):
+	velocity = (player.position - position).normalized() * 100
+	move_and_slide()
 
 func fire(direction: Vector2):
-	
+	pass
 
 func radar_ping():
-	var pingInst = ping.instantiate()
-	pingInst.position = position
-	get_parent().add_child(pingInst)
+	pass
 	
 
 func enemy_take_damage():

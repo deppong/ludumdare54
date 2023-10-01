@@ -7,7 +7,7 @@ func _on_menu_pressed():
 
 
 func _on_restart_pressed():
-	get_tree().reload_current_scene() 
+	get_parent().reload_current_scene() 
 
 func _on_exit_pressed():
 	queue_free()
