@@ -9,9 +9,9 @@ font_weight = 999
 
 [node name="Healthbar" type="Control"]
 layout_mode = 3
-anchor_right = 0.125
-anchor_bottom = 0.067
-offset_bottom = -0.360001
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_rb753")
@@ -19,8 +19,8 @@ script = ExtResource("1_k8i0f")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 0
-offset_right = 240.0
-offset_bottom = 72.0
+offset_right = 260.0
+offset_bottom = 56.0
 alignment = 1
 
 [node name="ProgressBar" type="ProgressBar" parent="VBoxContainer"]
@@ -28,6 +28,7 @@ layout_mode = 2
 size_flags_vertical = 3
 theme = ExtResource("1_rb753")
 max_value = 3.0
+value = 3.0
 
 [node name="MarginContainer" type="MarginContainer" parent="VBoxContainer"]
 layout_mode = 2

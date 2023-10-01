@@ -5,7 +5,6 @@ var value: int =3
 func _ready():
 	pass # Replace with function body.
 
-
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	$VBoxContainer/ProgressBar.set_value_no_signal(value)
@@ -18,4 +17,6 @@ func set_value(amount):
 	
 func get_value():
 	return value
-	
+
+func _on_player_health_changed(health_val):
+	set_value(health_val)

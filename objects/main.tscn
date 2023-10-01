@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://djdtyl7tf3634"]
+[gd_scene load_steps=12 format=3 uid="uid://djdtyl7tf3634"]
 
 [ext_resource type="Texture2D" uid="uid://dxhalnmmgdv32" path="res://art/adam.png" id="1_11q0t"]
 [ext_resource type="PackedScene" uid="uid://dogmmm25rvd6e" path="res://objects/player.tscn" id="1_e41k3"]
@@ -7,7 +7,6 @@
 [ext_resource type="Texture2D" uid="uid://bxw7bilofm5t8" path="res://art/mask.png" id="4_m1a6k"]
 [ext_resource type="Script" path="res://scripts/enemy_spawner.gd" id="6_kpugh"]
 [ext_resource type="PackedScene" uid="uid://bwvtpetpwghmv" path="res://objects/Healthbar.tscn" id="7_ljmq1"]
-[ext_resource type="PackedScene" uid="uid://dap4t81bnvn67" path="res://objects/AmmoBar.tscn" id="8_jl4dx"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bhvtb"]
 size = Vector2(515, 508)
@@ -33,6 +32,7 @@ scale = Vector2(2.525, 2.65)
 texture = ExtResource("1_11q0t")
 
 [node name="BackgroundPlayArea" type="Sprite2D" parent="."]
+visible = false
 modulate = Color(0.580392, 0.290196, 0, 1)
 position = Vector2(947, 557)
 scale = Vector2(3.51563, 3.51563)
@@ -79,7 +79,6 @@ visibility_layer = 2
 position = Vector2(277, 303)
 
 [node name="mask" type="Sprite2D" parent="."]
-visible = false
 position = Vector2(964, 544.5)
 scale = Vector2(4.01667, 4.01111)
 texture = ExtResource("4_m1a6k")
@@ -100,15 +99,10 @@ position = Vector2(5, 6)
 rotation = -0.0010433
 
 [node name="Healthbar" parent="." instance=ExtResource("7_ljmq1")]
-offset_left = 722.0
-offset_top = 818.0
-offset_right = 722.0
-offset_bottom = 818.0
+offset_left = 731.0
+offset_top = 817.0
+offset_right = 731.0
+offset_bottom = 817.0
 
-[node name="Healthbar2" parent="." instance=ExtResource("8_jl4dx")]
-offset_left = 971.0
-offset_top = 819.0
-offset_right = 971.0
-offset_bottom = 819.0
-
+[connection signal="health_changed" from="Player" to="Healthbar" method="_on_player_health_changed"]
 [connection signal="timeout" from="enemy_spawner/spawn_timer" to="enemy_spawner" method="_on_spawn_timer_timeout"]

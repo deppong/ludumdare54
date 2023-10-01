@@ -8,6 +8,8 @@ extends CharacterBody2D
 
 var pinging: bool = false
 
+signal health_changed(health_val)
+
 var beam = preload("res://objects/player_beam.tscn")
 
 var vel: Vector2
@@ -63,7 +65,7 @@ func _physics_process(delta):
 	
 func player_take_damage():
 	health-=1
-	print_debug("Player hit health: ", health)
+	health_changed.emit(health)
 	
 	if (health == 0):
 		print_debug("Game is over dude")
