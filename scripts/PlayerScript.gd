@@ -65,6 +65,14 @@ func radar():
 	for enemy in enemies:
 		if enemy.has_method("radar_ping"):
 			enemy.radar_ping()
+	$TwoPing.start()
+
+func radar2():
+	var enemies = get_tree().get_nodes_in_group("enemy")
+	
+	for enemy in enemies:
+		if enemy.has_method("radar_ping"):
+			enemy.radar_ping()
 
 func reload():
 	if ammo<ammoMax:

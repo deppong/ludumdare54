@@ -36,5 +36,10 @@ sprite_frames = SubResource("SpriteFrames_mist4")
 [node name="RadarCharge" type="Timer" parent="."]
 one_shot = true
 
+[node name="TwoPing" type="Timer" parent="."]
+wait_time = 0.3
+one_shot = true
+
 [connection signal="timeout" from="AmmoCharge" to="." method="reload"]
 [connection signal="timeout" from="RadarCharge" to="." method="radar"]
+[connection signal="timeout" from="TwoPing" to="." method="radar2"]
