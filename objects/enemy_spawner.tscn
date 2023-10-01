@@ -1,0 +1,33 @@
+[gd_scene load_steps=5 format=3 uid="uid://blfhbynlym3qy"]
+
+[ext_resource type="Script" path="res://scripts/enemy_spawner.gd" id="1_4rnp6"]
+[ext_resource type="PackedScene" uid="uid://c76ljtfxo7xq2" path="res://objects/enemy.tscn" id="2_rfh0n"]
+[ext_resource type="PackedScene" uid="uid://blulylhfg2ob5" path="res://objects/mortar_blast.tscn" id="3_axhxj"]
+
+[sub_resource type="Curve2D" id="Curve2D_nybnm"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 5, 6, 0, 0, 0, 0, 1922, 4, 0, 0, 0, 0, 1927, 1082, 0, 0, 0, 0, 10, 1082, 0, 0, 0, 0, 5, 6)
+}
+point_count = 5
+
+[node name="enemy_spawner" type="Node"]
+script = ExtResource("1_4rnp6")
+enemy_tscn = ExtResource("2_rfh0n")
+mortar_enemy_tcsn = ExtResource("3_axhxj")
+
+[node name="spawn_timer" type="Timer" parent="."]
+wait_time = 3.0
+autostart = true
+
+[node name="spawn_path" type="Path2D" parent="."]
+curve = SubResource("Curve2D_nybnm")
+
+[node name="spawn_point" type="PathFollow2D" parent="spawn_path"]
+position = Vector2(5, 6)
+rotation = -0.0010433
+
+[node name="_Timer_22247" type="Timer" parent="spawn_path/spawn_point"]
+wait_time = 0.2
+one_shot = true
+
+[connection signal="timeout" from="spawn_timer" to="." method="_on_spawn_timer_timeout"]

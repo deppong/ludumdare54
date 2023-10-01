@@ -7,6 +7,7 @@ var d = 0.0
 @export var radius = 150.0
 @export var speed = 2.0
 
+signal enemy_died(score)
 
 var blast = preload("res://objects/mortar_blast.tscn")
 var ping = preload("res://objects/ping.tscn")
@@ -22,6 +23,7 @@ func get_player():
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	get_parent().get_node("BackgroundPlayArea").position
+	print_debug("mortar enemy spawned")
 
 func _process(delta):
 	d+= delta
@@ -48,4 +50,5 @@ func enemy_take_damage():
 	get_parent().add_child(part)
 	part.position = position
 	part.emitting = true
+	enemy_died.emit(3)
 	queue_free()
