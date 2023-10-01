@@ -8,6 +8,8 @@ radius = 51.0
 height = 104.0
 
 [node name="Enemy" type="CharacterBody2D" groups=["enemy"]]
+collision_layer = 5
+collision_mask = 5
 script = ExtResource("1_n6urs")
 min = -22
 max = 22
@@ -16,7 +18,6 @@ max = 22
 shape = SubResource("CapsuleShape2D_iq1kk")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-visible = false
 scale = Vector2(0.792969, 0.792969)
 texture = ExtResource("2_3fmat")
 

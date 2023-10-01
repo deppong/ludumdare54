@@ -20,7 +20,6 @@ func _ready():
 	velocity = Vector2(randf_range(min, max), randf_range(min, max))
 	velocity = velocity * 3
 
-
 func _process(delta):
 	move_and_slide()
 
@@ -33,9 +32,12 @@ func fire(direction: Vector2):
 func _on_attack_timer_timeout():
 	fire(player.position)
 
-
 func radar_ping():
 	var pingInst = ping.instantiate()
 	pingInst.position = position
 	get_parent().add_child(pingInst)
 	
+
+func enemy_take_damage():
+	# ENEMY DIED :(
+	queue_free()
