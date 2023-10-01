@@ -1,11 +1,10 @@
 extends Control
 var value:int
-@export var max:int = 2
 @export var boxes:Array[NinePatchRect]
 @export var recharge:Timer
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	value = max;
+	pass
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -19,7 +18,6 @@ func _process(delta):
 		else:
 			b.modulate = Color(1,1,1,1)
 		i+=1
-	value = min(value,max)
 	
 func set_value(amount):
 	value=amount
