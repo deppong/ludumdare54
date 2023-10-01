@@ -7,6 +7,7 @@ extends CharacterBody2D
 
 var beam = preload("res://objects/enemy_beam.tscn")
 var ping = preload("res://objects/ping.tscn")
+var particle = preload("res://objects/enemy_explode.tscn")
 
 # Helper script in case the player is completely missing from the scene
 func get_player():
@@ -40,4 +41,6 @@ func radar_ping():
 
 func enemy_take_damage():
 	# ENEMY DIED :(
+	var part:GPUParticles2D = particle.instantiate()
+	part.position = position
 	queue_free()

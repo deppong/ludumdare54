@@ -1,10 +1,11 @@
-[gd_scene load_steps=13 format=3 uid="uid://djdtyl7tf3634"]
+[gd_scene load_steps=14 format=3 uid="uid://djdtyl7tf3634"]
 
-[ext_resource type="Texture2D" uid="uid://dxhalnmmgdv32" path="res://art/adam.png" id="1_11q0t"]
 [ext_resource type="PackedScene" uid="uid://dogmmm25rvd6e" path="res://objects/player.tscn" id="1_e41k3"]
+[ext_resource type="Texture2D" uid="uid://c10m28jtux0ot" path="res://art/grass.png" id="1_jws4r"]
 [ext_resource type="Texture2D" uid="uid://cph1qfbbhpa78" path="res://art/icon.svg" id="1_vre6o"]
 [ext_resource type="PackedScene" uid="uid://c76ljtfxo7xq2" path="res://objects/enemy.tscn" id="3_u6leu"]
-[ext_resource type="Texture2D" uid="uid://bxw7bilofm5t8" path="res://art/mask.png" id="4_m1a6k"]
+[ext_resource type="Texture2D" uid="uid://tvmixrg32dpg" path="res://art/mask2.png" id="5_i67vf"]
+[ext_resource type="Texture2D" uid="uid://c2fl24yh8tqru" path="res://art/white square.png" id="6_55xcn"]
 [ext_resource type="Script" path="res://scripts/enemy_spawner.gd" id="6_kpugh"]
 [ext_resource type="PackedScene" uid="uid://bwvtpetpwghmv" path="res://objects/Healthbar.tscn" id="7_ljmq1"]
 [ext_resource type="PackedScene" uid="uid://dap4t81bnvn67" path="res://objects/AmmoBar.tscn" id="8_jl4dx"]
@@ -27,10 +28,9 @@ point_count = 5
 [node name="main" type="Node2D"]
 
 [node name="Sprite2D2" type="Sprite2D" parent="."]
-modulate = Color(1, 1, 1, 0.207843)
-position = Vector2(988, 584.5)
+position = Vector2(957, 583)
 scale = Vector2(2.525, 2.65)
-texture = ExtResource("1_11q0t")
+texture = ExtResource("1_jws4r")
 
 [node name="BackgroundPlayArea" type="Sprite2D" parent="."]
 modulate = Color(0.580392, 0.290196, 0, 1)
@@ -79,10 +79,33 @@ visibility_layer = 2
 position = Vector2(277, 303)
 
 [node name="mask" type="Sprite2D" parent="."]
-visible = false
-position = Vector2(964, 544.5)
-scale = Vector2(4.01667, 4.01111)
-texture = ExtResource("4_m1a6k")
+position = Vector2(943, 559)
+scale = Vector2(1.72907, 1.72668)
+texture = ExtResource("5_i67vf")
+
+[node name="Sprite2D" type="Sprite2D" parent="mask"]
+modulate = Color(0, 0, 0, 1)
+position = Vector2(817.779, -3.47488)
+scale = Vector2(5.23348, 10.2895)
+texture = ExtResource("6_55xcn")
+
+[node name="Sprite2D2" type="Sprite2D" parent="mask"]
+modulate = Color(0, 0, 0, 1)
+position = Vector2(-814.888, -3.47488)
+scale = Vector2(5.23348, 10.2895)
+texture = ExtResource("6_55xcn")
+
+[node name="Sprite2D3" type="Sprite2D" parent="mask"]
+modulate = Color(0, 0, 0, 1)
+position = Vector2(-8.67511, 536.869)
+scale = Vector2(8.17148, 1.90347)
+texture = ExtResource("6_55xcn")
+
+[node name="Sprite2D4" type="Sprite2D" parent="mask"]
+modulate = Color(0, 0, 0, 1)
+position = Vector2(-8.67511, -540.344)
+scale = Vector2(8.17148, 1.90347)
+texture = ExtResource("6_55xcn")
 
 [node name="enemy_spawner" type="Node" parent="."]
 script = ExtResource("6_kpugh")
@@ -111,5 +134,9 @@ offset_top = 819.0
 offset_right = 971.0
 offset_bottom = 819.0
 boxes = [null, null]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(945, 564)
+zoom = Vector2(0.5, 0.5)
 
 [connection signal="timeout" from="enemy_spawner/spawn_timer" to="enemy_spawner" method="_on_spawn_timer_timeout"]
