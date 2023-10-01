@@ -83,3 +83,5 @@ func player_take_damage():
 	
 	if (health == 0):
 		print_debug("Game is over dude")
+
+

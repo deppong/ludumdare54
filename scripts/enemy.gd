@@ -1,9 +1,12 @@
 extends CharacterBody2D
 
-@export var min = -10
-@export var max = 10
-
 @onready var player = get_player()
+@onready var center_pos = get_parent().get_node("BackgroundPlayArea").position
+
+var d = 0.0
+@export var radius = 150.0
+@export var speed = 2.0
+
 
 var beam = preload("res://objects/enemy_beam.tscn")
 var ping = preload("res://objects/ping.tscn")
@@ -18,11 +21,12 @@ func get_player():
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	velocity = Vector2(randf_range(min, max), randf_range(min, max))
-	velocity = velocity * 3
+	get_parent().get_node("BackgroundPlayArea").position
 
 func _process(delta):
-	move_and_slide()
+	d+= delta
+	
+	position = Vector2 (sin(d * speed) * radius, cos(d * speed) * radius) + center_pos
 
 func fire(direction: Vector2):
 	var beamInst = beam.instantiate()

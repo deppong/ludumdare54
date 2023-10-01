@@ -128,12 +128,11 @@ offset_top = 818.0
 offset_right = 722.0
 offset_bottom = 818.0
 
-[node name="Healthbar2" parent="." node_paths=PackedStringArray("boxes") instance=ExtResource("8_jl4dx")]
-offset_left = 971.0
-offset_top = 819.0
-offset_right = 971.0
-offset_bottom = 819.0
-boxes = [null, null]
+[node name="Healthbar2" parent="." instance=ExtResource("8_jl4dx")]
+offset_left = 990.0
+offset_top = 829.0
+offset_right = 990.0
+offset_bottom = 829.0
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(945, 564)
