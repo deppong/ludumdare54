@@ -26,9 +26,7 @@ func _ready():
 	print_debug("mortar enemy spawned")
 
 func _process(delta):
-	d+= delta
-	
-	position = Vector2 (sin(d * speed) * radius, cos(d * speed) * radius) + center_pos
+	pass
 
 func fire(direction: Vector2):
 	var blastInst = blast.instantiate()

@@ -52,6 +52,8 @@ func spawn_enemy(type):
 			pass
 		_:
 			enemy = enemy_tscn.instantiate()
+			if (randi_range(0, 1) == 1):
+				enemy.speed *= -1
 	get_parent().add_child(enemy)
 
 func _on_spawn_timer_timeout():
