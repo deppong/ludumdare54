@@ -13,6 +13,9 @@ func _process(delta):
 func change_value(amount):
 	value = value + amount
 	
+func set_value(amount):
+	value = amount
+	
 func get_value():
 	return value
 	
