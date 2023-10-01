@@ -40,6 +40,7 @@ func _process(_delta):
 
 func increase_score(reward):
 	score+=reward
+	print_debug(score)
 	
 
 func spawn_enemy(type):
