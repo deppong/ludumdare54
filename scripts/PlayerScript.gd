@@ -7,7 +7,7 @@ extends CharacterBody2D
 @export var health: int = 3
 @export var ammoMax: int = 2
 
-var ammo:int
+var ammo:int = 2
 
 var pinging: bool = false
 

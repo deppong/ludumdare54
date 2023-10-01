@@ -11,12 +11,9 @@ func _on_spawn_timer_timeout():
 		enemy_count = len(get_tree().get_nodes_in_group("enemy"))
 		
 		var enemy = enemy_tscn.instantiate()
-		var spawn_location = $spawn_path/spawn_point
-		spawn_location.progress_ratio = randf()
-		
-		var direction = (spawn_location.rotation + PI /2)
-		
-		enemy.position = spawn_location.position
+
+		enemy.radius = randf_range(350.0, 1300.0)
+		enemy.speed  = randf_range(0.5, 1.0)
 		
 		get_parent().add_child(enemy)
 		

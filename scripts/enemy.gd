@@ -17,7 +17,7 @@ func get_player():
 	var nodes = get_tree().get_nodes_in_group("player")
 	if len(nodes) > 0:
 		return nodes[0]
-	push_error("The player is missing...")
+	null
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
