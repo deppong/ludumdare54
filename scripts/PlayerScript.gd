@@ -104,3 +104,4 @@ func dead():
 
 func showGameOverMenu():
 	get_parent().get_node("GameOverPanel").show()
+	get_parent().get_node("GameOverPanel/GameOverParticle").emitting = true
