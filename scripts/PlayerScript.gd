@@ -21,11 +21,13 @@ var lastDir: Vector2
 	
 func movement():
 	# player can't process movement code if pinging
-	if (pinging):
-		return
+	
 	
 	var dir = Input.get_vector("MoveLeft","MoveRight","MoveUp","MoveDown") 
 	dir = dir.normalized()
+	if(pinging):
+		dir = Vector2(0,0)
+	updateAnims(dir)
 	if(dir.x != 0):
 		if(abs(vel.x)<0.1):
 			vel.x = dir.x * initalSpd
@@ -40,7 +42,7 @@ func movement():
 	else:
 		vel.y = lerp(vel.y,0.0,deccel )
 	velocity = vel * speed
-	updateAnims(dir)
+	
 	move_and_slide()
 
 func actions():
@@ -97,7 +99,14 @@ func player_take_damage():
 #update animations for moving in each direction
 #TODO: replace with real code
 func updateAnims(dir):
-	if (dir.length() > 0):
+	if(dir.length()==0):
+		if(abs(lastDir.x)>abs(lastDir.y)):
+			if(lastDir.x>0): $AnimatedSprite2D.play("Rstand")
+			else: $AnimatedSprite2D.play("Lstand")
+		else:
+			if(lastDir.y<0): $AnimatedSprite2D.play("Ustand")
+			else: $AnimatedSprite2D.play("Dstand")
+	else:
 		if (abs(dir.x)>abs(dir.y)): #horiz
 			#$AnimatedSprite2D.play("Run Right")
 			if(dir.x>0): $AnimatedSprite2D.play("Rwalk")
@@ -106,13 +115,7 @@ func updateAnims(dir):
 			if(dir.y<0): $AnimatedSprite2D.play("Uwalk")
 			else: $AnimatedSprite2D.play("Dwalk")
 		lastDir = dir
-	else:
-		if(abs(lastDir.x)>abs(lastDir.y)):
-			if(lastDir.x>0): $AnimatedSprite2D.play("Rstand")
-			else: $AnimatedSprite2D.play("Lstand")
-		else:
-			if(dir.y<0): $AnimatedSprite2D.play("Ustand")
-			else: $AnimatedSprite2D.play("Dstand")
+	
 
 func dead():
 	var fadeout = get_parent().get_node("EndParticle/FadeoutBg")

@@ -1,6 +1,5 @@
 extends PanelContainer
 
-var gameScene = preload("res://objects/main.tscn")
 var mainMenu = preload("res://objects/MainMenu.tscn")
 
 # Called when the node enters the scene tree for the first time.
@@ -19,7 +18,7 @@ func _on_menu_pressed():
 
 
 func _on_restart_pressed():
-	get_tree().change_scene_to_packed(gameScene)
+	get_tree().reload_current_scene()
 	pass # Replace with function body.
 
 
