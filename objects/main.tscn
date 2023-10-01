@@ -1,11 +1,10 @@
-[gd_scene load_steps=14 format=3 uid="uid://djdtyl7tf3634"]
+[gd_scene load_steps=13 format=3 uid="uid://djdtyl7tf3634"]
 
 [ext_resource type="PackedScene" uid="uid://dogmmm25rvd6e" path="res://objects/player.tscn" id="1_e41k3"]
 [ext_resource type="Texture2D" uid="uid://c10m28jtux0ot" path="res://art/grass.png" id="1_jws4r"]
 [ext_resource type="Texture2D" uid="uid://cph1qfbbhpa78" path="res://art/icon.svg" id="1_vre6o"]
 [ext_resource type="PackedScene" uid="uid://c76ljtfxo7xq2" path="res://objects/enemy.tscn" id="3_u6leu"]
-[ext_resource type="Texture2D" uid="uid://tvmixrg32dpg" path="res://art/mask2.png" id="5_i67vf"]
-[ext_resource type="Texture2D" uid="uid://c2fl24yh8tqru" path="res://art/white square.png" id="6_55xcn"]
+[ext_resource type="PackedScene" uid="uid://dpoeonmmujvfg" path="res://objects/mask.tscn" id="4_mmeen"]
 [ext_resource type="Script" path="res://scripts/enemy_spawner.gd" id="6_kpugh"]
 [ext_resource type="PackedScene" uid="uid://bwvtpetpwghmv" path="res://objects/Healthbar.tscn" id="7_ljmq1"]
 [ext_resource type="PackedScene" uid="uid://dap4t81bnvn67" path="res://objects/AmmoBar.tscn" id="8_jl4dx"]
@@ -34,6 +33,7 @@ scale = Vector2(2.525, 2.65)
 texture = ExtResource("1_jws4r")
 
 [node name="BackgroundPlayArea" type="Sprite2D" parent="."]
+visible = false
 modulate = Color(0.580392, 0.290196, 0, 1)
 position = Vector2(947, 557)
 scale = Vector2(3.51563, 3.51563)
@@ -75,34 +75,7 @@ shape = SubResource("RectangleShape2D_c1d60")
 position = Vector2(947, 555)
 scale = Vector2(0.5, 0.5)
 
-[node name="mask" type="Sprite2D" parent="."]
-position = Vector2(943, 559)
-scale = Vector2(1.72907, 1.72668)
-texture = ExtResource("5_i67vf")
-
-[node name="Sprite2D" type="Sprite2D" parent="mask"]
-modulate = Color(0, 0, 0, 1)
-position = Vector2(817.779, -3.47488)
-scale = Vector2(5.23348, 10.2895)
-texture = ExtResource("6_55xcn")
-
-[node name="Sprite2D2" type="Sprite2D" parent="mask"]
-modulate = Color(0, 0, 0, 1)
-position = Vector2(-814.888, -3.47488)
-scale = Vector2(5.23348, 10.2895)
-texture = ExtResource("6_55xcn")
-
-[node name="Sprite2D3" type="Sprite2D" parent="mask"]
-modulate = Color(0, 0, 0, 1)
-position = Vector2(-8.67511, 536.869)
-scale = Vector2(8.17148, 1.90347)
-texture = ExtResource("6_55xcn")
-
-[node name="Sprite2D4" type="Sprite2D" parent="mask"]
-modulate = Color(0, 0, 0, 1)
-position = Vector2(-8.67511, -540.344)
-scale = Vector2(8.17148, 1.90347)
-texture = ExtResource("6_55xcn")
+[node name="mask2" parent="." instance=ExtResource("4_mmeen")]
 
 [node name="enemy_spawner" type="Node" parent="."]
 script = ExtResource("6_kpugh")

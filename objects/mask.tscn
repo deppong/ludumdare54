@@ -1,0 +1,57 @@
+[gd_scene load_steps=4 format=3 uid="uid://dpoeonmmujvfg"]
+
+[ext_resource type="Texture2D" uid="uid://tvmixrg32dpg" path="res://art/mask2.png" id="1_jdayg"]
+[ext_resource type="Texture2D" uid="uid://c2fl24yh8tqru" path="res://art/white square.png" id="2_fq0eg"]
+[ext_resource type="PackedScene" uid="uid://chocjunki34xp" path="res://objects/smoke_particles.tscn" id="3_j061m"]
+
+[node name="mask" type="Sprite2D"]
+position = Vector2(943, 559)
+scale = Vector2(1.35965, 1.35777)
+texture = ExtResource("1_jdayg")
+
+[node name="wallR" type="Sprite2D" parent="."]
+modulate = Color(0, 0, 0, 1)
+position = Vector2(1039.97, -4.41901)
+scale = Vector2(8.39118, 13.0852)
+texture = ExtResource("2_fq0eg")
+
+[node name="wallL" type="Sprite2D" parent="."]
+modulate = Color(0, 0, 0, 1)
+position = Vector2(-1036.3, -4.41901)
+scale = Vector2(8.4206, 13.0852)
+texture = ExtResource("2_fq0eg")
+
+[node name="wallB" type="Sprite2D" parent="."]
+modulate = Color(0, 0, 0, 1)
+position = Vector2(-11.0322, 682.738)
+scale = Vector2(10.3917, 2.80363)
+texture = ExtResource("2_fq0eg")
+
+[node name="wallT" type="Sprite2D" parent="."]
+modulate = Color(0, 0, 0, 1)
+position = Vector2(-11.0322, -687.156)
+scale = Vector2(10.3917, 2.86255)
+texture = ExtResource("2_fq0eg")
+
+[node name="GPUParticles2D" parent="." instance=ExtResource("3_j061m")]
+position = Vector2(-261.832, 29.4601)
+scale = Vector2(0.735483, 0.736502)
+lifetime = 5.0
+
+[node name="GPUParticles2D2" parent="." instance=ExtResource("3_j061m")]
+position = Vector2(-7.35486, -265.877)
+rotation = 1.57079
+scale = Vector2(0.736502, 0.735483)
+lifetime = 5.0
+
+[node name="GPUParticles2D3" parent="." instance=ExtResource("3_j061m")]
+position = Vector2(281.69, 21.3586)
+rotation = 3.14159
+scale = Vector2(0.735483, 0.736502)
+lifetime = 5.0
+
+[node name="GPUParticles2D4" parent="." instance=ExtResource("3_j061m")]
+position = Vector2(19.858, 274.715)
+rotation = -1.5708
+scale = Vector2(0.736502, 0.735483)
+lifetime = 5.0
