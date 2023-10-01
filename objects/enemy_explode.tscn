@@ -1,27 +1,52 @@
-[gd_scene load_steps=4 format=3 uid="uid://cweqx85gss2mc"]
+[gd_scene load_steps=9 format=3 uid="uid://cweqx85gss2mc"]
 
-[sub_resource type="Gradient" id="Gradient_d3lch"]
-colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+[ext_resource type="Texture2D" uid="uid://cdsrba6qvcsw6" path="res://art/particle.png" id="1_q4ab8"]
 
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_aktks"]
-gradient = SubResource("Gradient_d3lch")
+[sub_resource type="Gradient" id="Gradient_dgm23"]
+offsets = PackedFloat32Array(0, 0.457317, 1)
+colors = PackedColorArray(4.47616e-06, 0.629913, 0.315279, 1, 0.640637, 0.393484, 3.85046e-07, 1, 0.368901, 0.765911, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_qcdj2"]
+gradient = SubResource("Gradient_dgm23")
+
+[sub_resource type="Gradient" id="Gradient_5yyem"]
+colors = PackedColorArray(1, 1, 1, 1, 0.55, 0.430833, 0, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_obpy5"]
+gradient = SubResource("Gradient_5yyem")
+
+[sub_resource type="Curve" id="Curve_wg4j2"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.495822, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -1.00772, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_dha7n"]
+curve = SubResource("Curve_wg4j2")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_sn4ei"]
+lifetime_randomness = 0.6
 particle_flag_disable_z = true
 direction = Vector3(0, -1, 0)
 spread = 40.0
-gravity = Vector3(0, 120, 0)
-initial_velocity_min = 20.0
-initial_velocity_max = 60.0
+gravity = Vector3(0, 240, 0)
+initial_velocity_min = 80.0
+initial_velocity_max = 350.0
+angular_velocity_min = -150.0
+angular_velocity_max = 150.0
 orbit_velocity_min = 0.0
 orbit_velocity_max = 0.0
-color_ramp = SubResource("GradientTexture1D_aktks")
+scale_min = 0.3
+scale_max = 0.6
+scale_curve = SubResource("CurveTexture_dha7n")
+color = Color(0.85098, 0.309804, 1, 1)
+color_ramp = SubResource("GradientTexture1D_obpy5")
+color_initial_ramp = SubResource("GradientTexture1D_qcdj2")
 
 [node name="GPUParticles2D" type="GPUParticles2D"]
-emitting = false
+z_index = 1
+z_as_relative = false
 amount = 40
 process_material = SubResource("ParticleProcessMaterial_sn4ei")
-lifetime = 0.7
-one_shot = true
-explosiveness = 0.7
+texture = ExtResource("1_q4ab8")
+lifetime = 2.0
+explosiveness = 0.9
 randomness = 0.4

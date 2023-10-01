@@ -46,5 +46,7 @@ func radar_ping():
 func enemy_take_damage():
 	# ENEMY DIED :(
 	var part:GPUParticles2D = particle.instantiate()
+	get_parent().add_child(part)
 	part.position = position
+	part.emitting = true
 	queue_free()
