@@ -1,7 +1,8 @@
 extends Control
 var value:int
-@export var max:int
+@export var max:int = 2
 @export var boxes:Array[NinePatchRect]
+@export var recharge:Timer
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	value = max;
@@ -9,8 +10,16 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	$VBoxContainer/ProgressBar.set_value_no_signal(1-$Recharge.time_left/$Recharge.wait_time)
+	if(recharge!=null):
+		$VBoxContainer/ProgressBar.set_value_no_signal(1-recharge.time_left/recharge.wait_time)
+	var i = 0
+	for b in boxes:
+		if(i>value):
+			b.modulate = Color(0,0,0,0)
+		else:
+			b.modulate = Color(1,1,1,1)
+		i+=1
+	value = min(value,max)
 	
-	
-func set_ammo(value):
-	pass
+func set_value(amount):
+	value=amount
