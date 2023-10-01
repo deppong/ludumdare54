@@ -73,5 +73,5 @@ func _on_spawn_timer_timeout():
 	if can_spawn_mortar:
 		types_to_spawn.append(enemy_types.MORTAR)
 	
-	#spawn_enemy(types_to_spawn[randi() % len(types_to_spawn)])
-	spawn_enemy(enemy_types.MELEE)
+	spawn_enemy(types_to_spawn[randi() % len(types_to_spawn)])
+	#spawn_enemy(enemy_types.MELEE)
