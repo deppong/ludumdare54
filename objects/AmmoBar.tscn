@@ -9,6 +9,8 @@ font_names = PackedStringArray("Bahnschrift")
 font_weight = 999
 
 [node name="Healthbar" type="Control" node_paths=PackedStringArray("boxes")]
+z_index = 2
+z_as_relative = false
 layout_mode = 3
 anchor_right = 0.1
 anchor_bottom = 0.067

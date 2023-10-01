@@ -17,6 +17,7 @@ signal ammo_changed(ammo_val)
 var beam = preload("res://objects/player_beam.tscn")
 
 var vel: Vector2
+var lastDir: Vector2
 	
 func movement():
 	# player can't process movement code if pinging
@@ -99,10 +100,19 @@ func updateAnims(dir):
 	if (dir.length() > 0):
 		if (abs(dir.x)>abs(dir.y)): #horiz
 			#$AnimatedSprite2D.play("Run Right")
-			if(dir.x<0): $AnimatedSprite2D.flip_h = true
+			if(dir.x>0): $AnimatedSprite2D.play("Rwalk")
+			else: $AnimatedSprite2D.play("Lwalk")
 		else: #vert
-			if(dir.y<0): pass #$AnimatedSprite2D.play("Run this Up")
-			else: pass #$AnimatedSprite2D.play("Run this Down")
+			if(dir.y<0): $AnimatedSprite2D.play("Uwalk")
+			else: $AnimatedSprite2D.play("Dwalk")
+		lastDir = dir
+	else:
+		if(abs(lastDir.x)>abs(lastDir.y)):
+			if(lastDir.x>0): $AnimatedSprite2D.play("Rstand")
+			else: $AnimatedSprite2D.play("Lstand")
+		else:
+			if(dir.y<0): $AnimatedSprite2D.play("Ustand")
+			else: $AnimatedSprite2D.play("Dstand")
 
 func dead():
 	var fadeout = get_parent().get_node("EndParticle/FadeoutBg")
