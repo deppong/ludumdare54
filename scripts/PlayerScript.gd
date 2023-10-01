@@ -5,10 +5,14 @@ extends CharacterBody2D
 @export var deccel: float = .2
 @export var initalSpd: float = .2
 @export var health: int = 3
+@export var ammoMax: int = 2
+
+var ammo:int
 
 var pinging: bool = false
 
 signal health_changed(health_val)
+signal ammo_changed(ammo_val)
 
 var beam = preload("res://objects/player_beam.tscn")
 
@@ -39,11 +43,14 @@ func movement():
 
 func actions():
 	if (!pinging):
-		if (Input.is_action_just_pressed("Fire")):
+		if (Input.is_action_just_pressed("Fire")&&ammo>0):
 			var beamInst:Node2D = beam.instantiate()
 			get_parent().add_child(beamInst)
 			beamInst.position = position
 			beamInst.rotation = get_angle_to(get_global_mouse_position())
+			ammo-=1
+			$AmmoCharge.start()
+			ammo_changed.emit(ammo)
 	
 	if (Input.is_action_just_pressed("Radar")):
 		$RadarCharge.start()
@@ -59,6 +66,13 @@ func radar():
 		if enemy.has_method("radar_ping"):
 			enemy.radar_ping()
 
+func reload():
+	if ammo<ammoMax:
+		ammo+=1
+		ammo_changed.emit(ammo)
+	if ammo<ammoMax:
+		$AmmoCharge.start()
+	
 func _physics_process(delta):
 	actions()
 	movement()
