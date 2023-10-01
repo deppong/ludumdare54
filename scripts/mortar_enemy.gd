@@ -4,8 +4,8 @@ extends CharacterBody2D
 @onready var center_pos = get_parent().get_node("BackgroundPlayArea").position
 
 var d = 0.0
-@export var radius = 150.0
-@export var speed = 2.0
+@export var radius = randf_range(350.0, 1300)
+@export var speed = randf_range(0.5, 1.0)
 
 signal enemy_died(score)
 
@@ -34,6 +34,8 @@ func fire(direction: Vector2):
 	var blastInst = blast.instantiate()
 	blastInst.position = direction
 	get_parent().add_child(blastInst)
+	
+	radar_ping()
 
 func _on_attack_timer_timeout():
 	fire(player.position)

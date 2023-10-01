@@ -1,8 +1,8 @@
 extends Node
 
 # TODO change to static res:// path
-@export var enemy_tscn: PackedScene
-@export var mortar_enemy_tcsn: PackedScene
+var enemy_tscn = preload("res://objects/enemy.tscn")
+var mortar_enemy_tcsn = preload("res://objects/mortar_enemy.tscn")
 @export var melee_enemy_tcsn: PackedScene
 
 enum enemy_types {BEAM, MORTAR, MELEE}
@@ -23,12 +23,19 @@ func _process(_delta):
 	# Connect the enemies death signal to the function that increases our total score
 	var enemies = get_tree().get_nodes_in_group("enemy")
 	for enemy in enemies:
-		if (!enemy.is_connected("enemy_died", increase_score)):
+		if (enemy.has_signal("enemy_died") && !enemy.is_connected("enemy_died", increase_score)):
 			enemy.enemy_died.connect(increase_score)
 	
 	enemy_count = len(enemies)
 	
-	
+	if 0 <= score && score < 10:
+		$spawn_timer.wait_time = 5.0
+	elif 10 <= score && score < 20:
+		can_spawn_mortar = true
+	elif 20 <= score && score < 30:
+		enemy_cap = 10
+	elif 30 <= score && score < 40:
+		pass
 
 func increase_score(reward):
 	score+=reward
@@ -47,9 +54,14 @@ func spawn_enemy(type):
 	get_parent().add_child(enemy)
 
 func _on_spawn_timer_timeout():
-	if can_spawn_melee:
-		pass
-	if can_spawn_mortar:
-		pass
+	if enemy_count >= enemy_cap:
+		return
 	
-	spawn_enemy(enemy_types.BEAM)
+	
+	var types_to_spawn = [enemy_types.BEAM, enemy_types.BEAM]
+	if can_spawn_melee: 
+		types_to_spawn.append(enemy_types.MELEE)
+	if can_spawn_mortar:
+		types_to_spawn.append(enemy_types.MORTAR)
+	
+	spawn_enemy(types_to_spawn[randi() % len(types_to_spawn)])

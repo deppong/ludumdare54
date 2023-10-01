@@ -1,8 +1,6 @@
-[gd_scene load_steps=5 format=3 uid="uid://blfhbynlym3qy"]
+[gd_scene load_steps=3 format=3 uid="uid://blfhbynlym3qy"]
 
 [ext_resource type="Script" path="res://scripts/enemy_spawner.gd" id="1_4rnp6"]
-[ext_resource type="PackedScene" uid="uid://c76ljtfxo7xq2" path="res://objects/enemy.tscn" id="2_rfh0n"]
-[ext_resource type="PackedScene" uid="uid://blulylhfg2ob5" path="res://objects/mortar_blast.tscn" id="3_axhxj"]
 
 [sub_resource type="Curve2D" id="Curve2D_nybnm"]
 _data = {
@@ -12,8 +10,6 @@ point_count = 5
 
 [node name="enemy_spawner" type="Node"]
 script = ExtResource("1_4rnp6")
-enemy_tscn = ExtResource("2_rfh0n")
-mortar_enemy_tcsn = ExtResource("3_axhxj")
 
 [node name="spawn_timer" type="Timer" parent="."]
 wait_time = 3.0

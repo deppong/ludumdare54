@@ -11,4 +11,4 @@ func deal_damage():
 		for body in bodies:
 			if(body.has_method("player_take_damage")):
 				print_debug("killed enemy")
-				body.enemy_take_damage()
+				body.player_take_damage()
