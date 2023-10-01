@@ -27,7 +27,7 @@ func movement():
 	dir = dir.normalized()
 	if(pinging):
 		dir = Vector2(0,0)
-	updateAnims(dir)
+	updateAnims(get_global_mouse_position()-position,dir.length()>0)
 	if(dir.x != 0):
 		if(abs(vel.x)<0.1):
 			vel.x = dir.x * initalSpd
@@ -98,13 +98,13 @@ func player_take_damage():
 		dead()
 #update animations for moving in each direction
 #TODO: replace with real code
-func updateAnims(dir):
-	if(dir.length()==0):
-		if(abs(lastDir.x)>abs(lastDir.y)):
-			if(lastDir.x>0): $AnimatedSprite2D.play("Rstand")
+func updateAnims(dir,walking):
+	if(!walking):
+		if(abs(dir.x)>abs(dir.y)):
+			if(dir.x>0): $AnimatedSprite2D.play("Rstand")
 			else: $AnimatedSprite2D.play("Lstand")
 		else:
-			if(lastDir.y<0): $AnimatedSprite2D.play("Ustand")
+			if(dir.y<0): $AnimatedSprite2D.play("Ustand")
 			else: $AnimatedSprite2D.play("Dstand")
 	else:
 		if (abs(dir.x)>abs(dir.y)): #horiz
@@ -114,7 +114,6 @@ func updateAnims(dir):
 		else: #vert
 			if(dir.y<0): $AnimatedSprite2D.play("Uwalk")
 			else: $AnimatedSprite2D.play("Dwalk")
-		lastDir = dir
 	
 
 func dead():

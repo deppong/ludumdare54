@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://dogmmm25rvd6e"]
+[gd_scene load_steps=27 format=3 uid="uid://dogmmm25rvd6e"]
 
 [ext_resource type="Script" path="res://scripts/PlayerScript.gd" id="1_1jluk"]
 [ext_resource type="Texture2D" uid="uid://dr5wj86t3qx0c" path="res://art/PlayerFrames/Dstand.png" id="2_p40yq"]
@@ -22,10 +22,12 @@
 [ext_resource type="Texture2D" uid="uid://cpmaxnombfo6e" path="res://art/PlayerFrames/Uwalk2.png" id="19_0gyvb"]
 [ext_resource type="Texture2D" uid="uid://cnowcs6rgywb5" path="res://art/PlayerFrames/Uwalk3.png" id="20_m8m8l"]
 [ext_resource type="Texture2D" uid="uid://bakj16ywwvlnj" path="res://art/PlayerFrames/Uwalk4.png" id="21_wkhoi"]
+[ext_resource type="Texture2D" uid="uid://bn0anxb2ov3te" path="res://art/Gun.png" id="23_u61kk"]
+[ext_resource type="Script" path="res://objects/GUN.gd" id="24_fq3bt"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_koeyb"]
 radius = 84.9999
-height = 170.0
+height = 339.286
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_mist4"]
 animations = [{
@@ -131,6 +133,7 @@ animations = [{
 }]
 
 [node name="Player" type="CharacterBody2D" groups=["player"]]
+position = Vector2(0, -145)
 collision_layer = 3
 motion_mode = 1
 script = ExtResource("1_1jluk")
@@ -139,7 +142,7 @@ accel = 0.2
 deccel = 0.1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 154)
+position = Vector2(-1, 109)
 scale = Vector2(0.800001, 0.559999)
 shape = SubResource("CapsuleShape2D_koeyb")
 
@@ -153,7 +156,7 @@ texture = ExtResource("2_u2vjb")
 z_index = 1
 z_as_relative = false
 sprite_frames = SubResource("SpriteFrames_mist4")
-animation = &"Dstand"
+animation = &"Dwalk"
 
 [node name="AmmoCharge" type="Timer" parent="."]
 one_shot = true
@@ -164,6 +167,13 @@ one_shot = true
 [node name="TwoPing" type="Timer" parent="."]
 wait_time = 0.3
 one_shot = true
+
+[node name="GUN" type="Sprite2D" parent="."]
+z_index = 1
+texture = ExtResource("23_u61kk")
+centered = false
+offset = Vector2(-30, -100)
+script = ExtResource("24_fq3bt")
 
 [connection signal="timeout" from="AmmoCharge" to="." method="reload"]
 [connection signal="timeout" from="RadarCharge" to="." method="radar"]
