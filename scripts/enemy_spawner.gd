@@ -29,13 +29,14 @@ func _process(_delta):
 	enemy_count = len(enemies)
 	
 	if 0 <= score && score < 10:
-		$spawn_timer.wait_time = 5.0
-	elif 10 <= score && score < 20:
-		can_spawn_mortar = true
-	elif 20 <= score && score < 30:
-		enemy_cap = 10
-	elif 30 <= score && score < 40:
 		pass
+	elif 10 <= score && score < 20:
+		
+		$spawn_timer.wait_time = 5.0
+	elif 20 <= score && score < 30:
+		can_spawn_mortar = true
+	elif 30 <= score && score < 40:
+		enemy_cap = 10
 
 func increase_score(reward):
 	score+=reward
