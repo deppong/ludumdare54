@@ -79,7 +79,6 @@ visibility_layer = 2
 position = Vector2(277, 303)
 
 [node name="mask" type="Sprite2D" parent="."]
-visible = false
 position = Vector2(964, 544.5)
 scale = Vector2(4.01667, 4.01111)
 texture = ExtResource("4_m1a6k")

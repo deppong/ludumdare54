@@ -8,6 +8,8 @@ func _process(_delta):
 
 func _on_spawn_timer_timeout():
 	if (enemy_count < 5):
+		enemy_count = len(get_tree().get_nodes_in_group("enemy"))
+		
 		var enemy = enemy_tscn.instantiate()
 		var spawn_location = $spawn_path/spawn_point
 		spawn_location.progress_ratio = randf()
@@ -17,5 +19,5 @@ func _on_spawn_timer_timeout():
 		enemy.position = spawn_location.position
 		
 		get_parent().add_child(enemy)
-		enemy_count+=1
+		
 		

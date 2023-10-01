@@ -36,11 +36,12 @@ func movement():
 	move_and_slide()
 
 func actions():
-	if (Input.is_action_just_pressed("Fire")):
-		var beamInst:Node2D = beam.instantiate()
-		get_parent().add_child(beamInst)
-		beamInst.position = position
-		beamInst.rotation = get_angle_to(get_global_mouse_position())
+	if (!pinging):
+		if (Input.is_action_just_pressed("Fire")):
+			var beamInst:Node2D = beam.instantiate()
+			get_parent().add_child(beamInst)
+			beamInst.position = position
+			beamInst.rotation = get_angle_to(get_global_mouse_position())
 	
 	if (Input.is_action_just_pressed("Radar")):
 		$RadarCharge.start()
