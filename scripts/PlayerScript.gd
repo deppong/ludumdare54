@@ -39,6 +39,7 @@ func movement():
 	else:
 		vel.y = lerp(vel.y,0.0,deccel )
 	velocity = vel * speed
+	updateAnims(dir)
 	move_and_slide()
 
 func actions():
@@ -92,7 +93,16 @@ func player_take_damage():
 	if (health == 0):
 		print_debug("Game is over dude")
 		dead()
-
+#update animations for moving in each direction
+#TODO: replace with real code
+func updateAnims(dir):
+	if (dir.length() > 0):
+		if (abs(dir.x)>abs(dir.y)): #horiz
+			#$AnimatedSprite2D.play("Run Right")
+			if(dir.x<0): $AnimatedSprite2D.flip_h = true
+		else: #vert
+			if(dir.y<0): pass #$AnimatedSprite2D.play("Run this Up")
+			else: pass #$AnimatedSprite2D.play("Run this Down")
 
 func dead():
 	var fadeout = get_parent().get_node("EndParticle/FadeoutBg")
