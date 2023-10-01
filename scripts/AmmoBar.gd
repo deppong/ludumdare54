@@ -6,7 +6,7 @@ var value:int = 2
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if(recharge):
-		$VBoxContainer/ProgressBar.set_value_no_signal(1-recharge.time_left/recharge.wait_time)
+		$VBoxContainer/ProgressBar.set_value_no_signal(pow((1-recharge.time_left/recharge.wait_time),1.5))
 	var i = 0
 	for b in boxes:
 		if(i>=value):
