@@ -6,6 +6,9 @@ func _ready():
 	anim.play("player_beam_fadeOut")
 
 func _process(_delta):
+	pass
+
+func shoot_beam():
 	if($Area2D.has_overlapping_bodies()):
 		var bodies = $Area2D.get_overlapping_bodies() #node2d array
 		for body in bodies:
