@@ -32,6 +32,7 @@ shape = SubResource("CircleShape2D_tsxkm")
 sprite_frames = SubResource("SpriteFrames_mist4")
 
 [node name="AmmoCharge" type="Timer" parent="."]
+one_shot = true
 
 [node name="RadarCharge" type="Timer" parent="."]
 one_shot = true
