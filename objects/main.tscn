@@ -109,6 +109,5 @@ position = Vector2(945, 564)
 zoom = Vector2(0.5, 0.5)
 
 [connection signal="ammo_changed" from="Player" to="AmmoBar" method="set_value"]
-[connection signal="ammo_changed" from="Player" to="AmmoBar" method="_on_player_ammo_changed"]
 [connection signal="health_changed" from="Player" to="Healthbar" method="set_value"]
 [connection signal="timeout" from="enemy_spawner/spawn_timer" to="enemy_spawner" method="_on_spawn_timer_timeout"]

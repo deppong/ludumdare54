@@ -1,6 +1,7 @@
-[gd_scene load_steps=9 format=3 uid="uid://cweqx85gss2mc"]
+[gd_scene load_steps=10 format=3 uid="uid://cweqx85gss2mc"]
 
 [ext_resource type="Texture2D" uid="uid://cdsrba6qvcsw6" path="res://art/particle.png" id="1_q4ab8"]
+[ext_resource type="Script" path="res://scripts/enemy_explode.gd" id="2_3t2og"]
 
 [sub_resource type="Gradient" id="Gradient_dgm23"]
 offsets = PackedFloat32Array(0, 0.457317, 1)
@@ -44,9 +45,19 @@ color_initial_ramp = SubResource("GradientTexture1D_qcdj2")
 [node name="GPUParticles2D" type="GPUParticles2D"]
 z_index = 1
 z_as_relative = false
+emitting = false
 amount = 40
 process_material = SubResource("ParticleProcessMaterial_sn4ei")
 texture = ExtResource("1_q4ab8")
 lifetime = 2.0
+one_shot = true
 explosiveness = 0.9
 randomness = 0.4
+script = ExtResource("2_3t2og")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 4.0
+one_shot = true
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
