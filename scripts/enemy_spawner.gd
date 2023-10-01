@@ -48,6 +48,8 @@ func spawn_enemy(type):
 	match type:
 		enemy_types.MORTAR:
 			enemy = mortar_enemy_tcsn.instantiate()
+			$spawn_path/spawn_point.progress_ratio = randf()
+			enemy.position = $spawn_path/spawn_point.position
 			print_debug("instantiate mortar enemy")
 		enemy_types.MELEE:
 			pass

@@ -2,25 +2,12 @@ extends PanelContainer
 
 var mainMenu = preload("res://objects/MainMenu.tscn")
 
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
-
-
 func _on_menu_pressed():
 	get_tree().change_scene_to_packed(mainMenu)
-	pass # Replace with function body.
 
 
 func _on_restart_pressed():
-	get_tree().reload_current_scene()
-	pass # Replace with function body.
-
+	get_tree().reload_current_scene() 
 
 func _on_exit_pressed():
 	queue_free()
