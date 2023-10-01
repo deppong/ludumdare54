@@ -1,12 +1,62 @@
-[gd_scene load_steps=3 format=3 uid="uid://bc1qg7xiabifp"]
+[gd_scene load_steps=7 format=3 uid="uid://bc1qg7xiabifp"]
 
+[ext_resource type="Texture2D" uid="uid://cph1qfbbhpa78" path="res://art/icon.svg" id="1_tcnku"]
 [ext_resource type="PackedScene" uid="uid://dogmmm25rvd6e" path="res://objects/player.tscn" id="1_uhe35"]
-[ext_resource type="PackedScene" uid="uid://c76ljtfxo7xq2" path="res://objects/enemy.tscn" id="2_vsba7"]
+[ext_resource type="PackedScene" uid="uid://calbss857drpl" path="res://objects/mortar_enemy.tscn" id="3_76qyd"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_of20p"]
+size = Vector2(515, 508)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wt4g6"]
+size = Vector2(9.95556, 144.213)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wmf14"]
+size = Vector2(146.204, 8.81778)
 
 [node name="enemy_test_playpen" type="Node"]
+
+[node name="BackgroundPlayArea" type="Sprite2D" parent="."]
+visible = false
+modulate = Color(0.580392, 0.290196, 0, 1)
+position = Vector2(947, 557)
+scale = Vector2(3.51563, 3.51563)
+texture = ExtResource("1_tcnku")
+
+[node name="PlayArea" type="Area2D" parent="BackgroundPlayArea"]
+position = Vector2(-269.369, -158.436)
+scale = Vector2(0.284444, 0.284444)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BackgroundPlayArea/PlayArea"]
+position = Vector2(942.5, 561)
+shape = SubResource("RectangleShape2D_of20p")
+
+[node name="Vert_left" type="StaticBody2D" parent="BackgroundPlayArea"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BackgroundPlayArea/Vert_left"]
+position = Vector2(-69.12, -0.142227)
+shape = SubResource("RectangleShape2D_wt4g6")
+
+[node name="Vert_right" type="StaticBody2D" parent="BackgroundPlayArea"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BackgroundPlayArea/Vert_right"]
+position = Vector2(67.4133, -0.142227)
+shape = SubResource("RectangleShape2D_wt4g6")
+
+[node name="Horiz_top" type="StaticBody2D" parent="BackgroundPlayArea"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BackgroundPlayArea/Horiz_top"]
+position = Vector2(-0.853333, -67.1289)
+shape = SubResource("RectangleShape2D_wmf14")
+
+[node name="Horiz_bottom" type="StaticBody2D" parent="BackgroundPlayArea"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BackgroundPlayArea/Horiz_bottom"]
+position = Vector2(-0.711121, 67.4133)
+shape = SubResource("RectangleShape2D_wmf14")
 
 [node name="Player" parent="." instance=ExtResource("1_uhe35")]
 position = Vector2(940, 524)
 
-[node name="CharacterBody2D" parent="." instance=ExtResource("2_vsba7")]
-position = Vector2(259, 353)
+[node name="mortar_enemy" parent="." instance=ExtResource("3_76qyd")]
+position = Vector2(183, 633)
+radius = 350.0

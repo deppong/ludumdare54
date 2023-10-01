@@ -1,0 +1,27 @@
+[gd_scene load_steps=4 format=3 uid="uid://calbss857drpl"]
+
+[ext_resource type="Script" path="res://scripts/mortar_enemy.gd" id="1_d0spd"]
+[ext_resource type="Texture2D" uid="uid://cph1qfbbhpa78" path="res://art/icon.svg" id="2_do17x"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_iq1kk"]
+radius = 51.0
+height = 104.0
+
+[node name="mortar_enemy" type="CharacterBody2D" groups=["enemy"]]
+collision_layer = 5
+collision_mask = 5
+script = ExtResource("1_d0spd")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_iq1kk")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+visible = false
+scale = Vector2(0.792969, 0.792969)
+texture = ExtResource("2_do17x")
+
+[node name="attack_timer" type="Timer" parent="."]
+wait_time = 3.0
+autostart = true
+
+[connection signal="timeout" from="attack_timer" to="." method="_on_attack_timer_timeout"]
