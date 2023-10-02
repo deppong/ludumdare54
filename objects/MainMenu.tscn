@@ -52,7 +52,7 @@ custom_minimum_size = Vector2(1200, 0)
 layout_mode = 2
 theme_override_font_sizes/normal_font_size = 120
 bbcode_enabled = true
-text = "[center]Name of this game[/center]
+text = "[center]Shot in the Dark[/center]
 "
 fit_content = true
 
@@ -71,7 +71,7 @@ theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_pressed_color = Color(0.533333, 0.533333, 0.533333, 1)
 theme_override_colors/font_hover_color = Color(0.752941, 0.752941, 0.752941, 1)
 theme_override_font_sizes/font_size = 40
-text = "Play the damn game"
+text = "Play Game"
 alignment = 0
 
 [node name="HowToBtn" type="Button" parent="Canvas/Panel/MarginContainer/VBoxContainer/MarginContainer2/VBoxContainer"]
@@ -94,7 +94,7 @@ alignment = 0
 layout_mode = 2
 theme_override_colors/font_color = Color(0.298039, 0.298039, 0.298039, 1)
 theme_override_font_sizes/font_size = 40
-text = "Created for LD 54 by AV, ID, RW"
+text = "Created for LD 54 by Ghastly Microwave, HexGromp, and NullCode"
 
 [node name="HowToPanel" type="Panel" parent="Canvas"]
 visible = false
