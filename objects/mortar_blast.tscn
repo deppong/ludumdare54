@@ -1,7 +1,7 @@
 [gd_scene load_steps=14 format=3 uid="uid://blulylhfg2ob5"]
 
 [ext_resource type="Script" path="res://scripts/mortar_blast.gd" id="1_sdeik"]
-[ext_resource type="SpriteFrames" uid="uid://bwofcenphb00g" path="res://art/Boom.res" id="2_17wy0"]
+[ext_resource type="SpriteFrames" path="res://art/Boom.res" id="2_17wy0"]
 [ext_resource type="Texture2D" uid="uid://bay8bkkepjqhd" path="res://art/AOECircle.png" id="2_sctb7"]
 [ext_resource type="Texture2D" uid="uid://bh1tsgoaln6sf" path="res://art/BeamGlow.png" id="3_aw8u1"]
 [ext_resource type="Texture2D" uid="uid://bwserkbgk0pr7" path="res://art/Warning.png" id="3_ceru8"]

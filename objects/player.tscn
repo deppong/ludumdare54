@@ -163,6 +163,7 @@ animation = &"Dwalk"
 one_shot = true
 
 [node name="RadarCharge" type="Timer" parent="."]
+wait_time = 0.5
 one_shot = true
 
 [node name="TwoPing" type="Timer" parent="."]
@@ -181,6 +182,10 @@ script = ExtResource("24_fq3bt")
 [node name="Muzzle" type="Node2D" parent="GUN"]
 position = Vector2(201.901, -10.194)
 
+[node name="RadarCoolDown" type="Timer" parent="."]
+one_shot = true
+
 [connection signal="timeout" from="AmmoCharge" to="." method="reload"]
 [connection signal="timeout" from="RadarCharge" to="." method="radar"]
 [connection signal="timeout" from="TwoPing" to="." method="radar2"]
+[connection signal="timeout" from="RadarCoolDown" to="." method="_on_radar_cool_down_timeout"]

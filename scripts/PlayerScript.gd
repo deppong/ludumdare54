@@ -11,9 +11,11 @@ var gameOver = false
 var ammo:int = 2
 
 var pinging: bool = false
+var can_ping = true
 
 signal health_changed(health_val)
 signal ammo_changed(ammo_val)
+signal start_cooldown()
 
 var beam = preload("res://objects/player_beam.tscn")
 var hurt = preload("res://objects/player_hurt_particle.tscn")
@@ -51,6 +53,7 @@ func actions():
 	if(gameOver):
 		pinging = false
 		$RadarCharge.stop()
+		$RadarCoolDown.stop()
 		return
 	
 	if (!pinging):
@@ -64,7 +67,7 @@ func actions():
 			$AmmoCharge.start()
 			ammo_changed.emit(ammo)
 	
-	if (Input.is_action_just_pressed("Radar")):
+	if (Input.is_action_just_pressed("Radar") && can_ping):
 		$RadarCharge.start()
 		pinging = true
 	if (Input.is_action_just_released("Radar")):
@@ -78,6 +81,9 @@ func radar():
 		if enemy.has_method("radar_ping"):
 			enemy.radar_ping()
 	$TwoPing.start()
+	$RadarCoolDown.start()
+	start_cooldown.emit()
+	can_ping = false
 
 func radar2():
 	var enemies = get_tree().get_nodes_in_group("enemy")
@@ -146,3 +152,7 @@ func showGameOverMenu():
 	
 	get_parent().get_node("GameOverPanel").show()
 	get_parent().get_node("GameOverPanel/GameOverParticle").emitting = true
+
+
+func _on_radar_cool_down_timeout():
+	can_ping = true

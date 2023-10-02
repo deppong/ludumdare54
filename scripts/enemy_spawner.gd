@@ -34,13 +34,14 @@ func _process(_delta):
 	
 	if score in range(0, 10):
 		enemy_cap = 1
-	elif score in range(10, 15):
-		enemy_cap = 3
+	elif score in range(10, 20):
+		enemy_cap = 2
 		$spawn_timer.wait_time = 5.0
-	elif score in range(15, 30):
+	elif score in range(20, 30):
+		enemy_cap = 3
 		can_spawn_mortar = true
 	elif score in range(30, 40):
-		enemy_cap = 10
+		enemy_cap = 4
 		can_spawn_melee = true
 
 func increase_score(reward):
