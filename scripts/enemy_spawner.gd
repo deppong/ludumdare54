@@ -19,10 +19,13 @@ var multiplier = 0
 var can_spawn_mortar: bool = false
 var can_spawn_melee: bool = false
 var enemy_cap = 5
+var animator:AnimationPlayer
 
 func _ready():
 	$spawn_timer.wait_time = 8.0
 	scoreDisplay = get_parent().get_node("ScoreCanvas/ScoreLabel")
+	animator = scoreDisplay.get_node("AnimationPlayer")
+	
 	scoreDisplay.text = "[center]"+ format_score(str(0))
 
 func _process(_delta):
@@ -42,7 +45,7 @@ func _process(_delta):
 	elif score in range(20, 30):
 		enemy_cap = 3
 		can_spawn_mortar = true
-		player.ammoMax = 3
+		
 	elif score in range(30, 40):
 		enemy_cap = 4
 		can_spawn_melee = true
@@ -50,12 +53,12 @@ func _process(_delta):
 	elif score in range(40, 50):
 		enemy_cap = 5
 		can_spawn_melee = true
-		player.ammoMax = 4
+		player.ammoMax = 3
 		$spawn_timer.wait_time = 4
 	elif score >60:
-		$spawn_timer.wait_time = 3.5
+		$spawn_timer.wait_time = 3.5-score/200
 		enemy_cap = 6+score/40
-		player.ammoMax = 5
+		player.ammoMax = int(3+score/60)
 		
 	if score>=5 && !$AudioStreamPlayer.playing:
 		$AudioStreamPlayer.play()
@@ -63,6 +66,9 @@ func _process(_delta):
 func increase_score(reward):
 	score+=reward #*(1+multiplier)
 	#multiplier+=0.2
+	animator.play("Score Blip")	
+	var camera = get_parent().get_node("Camera2D/AnimationPlayer")
+	camera.play("Punc")
 	print_debug(score)
 	scoreDisplay.text = "[center]"+ format_score(str(score*100))
 	

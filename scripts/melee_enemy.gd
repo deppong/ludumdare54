@@ -27,7 +27,7 @@ func _ready():
 	pass
 
 func _physics_process(delta):
-	if (sploding): return
+	#if (sploding): return
 	velocity = (player.position - position).normalized() * 100
 	if (player.position - position).length()<500:
 		if !$AudioStreamPlayer2D.playing:
