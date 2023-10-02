@@ -4,7 +4,7 @@ extends CharacterBody2D
 @export var accel: float = .1
 @export var deccel: float = .2
 @export var initalSpd: float = .2
-@export var health: float = 3
+@export var health: float = 2
 @export var ammoMax: int = 2
 
 var gameOver = false
@@ -145,12 +145,12 @@ func updateAnims(dir,walking):
 			else: $AnimatedSprite2D.play("Dwalk")
 	
 func heal():
-	if health >0.01 && health <3:
+	if health >0.01 && health <2:
 		health+=healRate
 		healRate+=0.000001
 		health_changed.emit(health)
-	elif health >3:
-		health = min(health,3)
+	elif health >2:
+		health = min(health,2)
 		healRate = 0
 func dead():
 	var fadeout = get_parent().get_node("EndParticle/FadeoutBg")

@@ -58,7 +58,7 @@ func _process(_delta):
 	elif score >60:
 		$spawn_timer.wait_time = 3.5-score/200
 		enemy_cap = 6+score/40
-		player.ammoMax = int(3+score/60)
+		player.ammoMax = int(3+(score-60)/60)
 		
 	if score>=5 && !$AudioStreamPlayer.playing:
 		$AudioStreamPlayer.play()

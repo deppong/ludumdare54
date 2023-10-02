@@ -59,6 +59,7 @@ shape = SubResource("CircleShape2D_53ipm")
 shape = SubResource("CircleShape2D_kq241")
 
 [node name="explosion_delay" type="Timer" parent="."]
+wait_time = 0.532
 one_shot = true
 
 [node name="hitbox" type="CollisionShape2D" parent="."]
