@@ -1,0 +1,61 @@
+[gd_scene load_steps=3 format=3 uid="uid://7r0bovkwx31y"]
+
+[ext_resource type="Script" path="res://SCRIPTS/Pause.gd" id="1_o8kte"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_atip7"]
+bg_color = Color(0.176471, 0.168627, 0.180392, 0.823529)
+
+[node name="PauseCanvas" type="CanvasLayer"]
+visible = false
+offset = Vector2(-960, -540)
+transform = Transform2D(1, 0, 0, 1, -960, -540)
+script = ExtResource("1_o8kte")
+
+[node name="Panel" type="Panel" parent="."]
+z_index = 2
+z_as_relative = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 1920.0
+offset_bottom = 1080.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_atip7")
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 1700
+theme_override_constants/margin_right = 1700
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/MarginContainer"]
+z_index = 3
+z_as_relative = false
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+alignment = 1
+
+[node name="Resume" type="Button" parent="Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = "RESUME"
+
+[node name="Title" type="Button" parent="Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = "TITLE"
+
+[node name="Quit" type="Button" parent="Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = "ABANDON"
+
+[connection signal="pressed" from="Panel/MarginContainer/VBoxContainer/Resume" to="." method="_on_resume_pressed"]
+[connection signal="pressed" from="Panel/MarginContainer/VBoxContainer/Title" to="." method="_on_title_pressed"]
+[connection signal="pressed" from="Panel/MarginContainer/VBoxContainer/Quit" to="." method="_on_quit_pressed"]
