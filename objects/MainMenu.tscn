@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://cwwh873b1oseu"]
+[gd_scene load_steps=5 format=3 uid="uid://cwwh873b1oseu"]
 
 [ext_resource type="Script" path="res://scripts/MainMenu.gd" id="1_5dtjb"]
+[ext_resource type="AudioStream" uid="uid://ihfpyfjog164" path="res://audio/Radar1.wav" id="2_uolix"]
+[ext_resource type="AudioStream" uid="uid://cxwiugltshukg" path="res://audio/Radar2.wav" id="3_gi7k8"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bqx42"]
 bg_color = Color(0.247059, 0.247059, 0.247059, 1)
@@ -82,6 +84,12 @@ text = "How to Play
 "
 alignment = 0
 
+[node name="Quit" type="Button" parent="Canvas/Panel/MarginContainer/VBoxContainer/MarginContainer2/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "Quit"
+alignment = 0
+
 [node name="Label2" type="Label" parent="Canvas/Panel/MarginContainer/VBoxContainer/MarginContainer2/VBoxContainer"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.298039, 0.298039, 0.298039, 1)
@@ -137,6 +145,16 @@ theme_override_colors/font_hover_color = Color(0.752941, 0.752941, 0.752941, 1)
 theme_override_font_sizes/font_size = 51
 text = "Close"
 
+[node name="hover_sound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_uolix")
+
+[node name="click_sound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_gi7k8")
+
+[connection signal="mouse_entered" from="Canvas/Panel/MarginContainer/VBoxContainer/MarginContainer2/VBoxContainer/PlayBtn" to="." method="on_hover"]
 [connection signal="pressed" from="Canvas/Panel/MarginContainer/VBoxContainer/MarginContainer2/VBoxContainer/PlayBtn" to="." method="StartGame"]
+[connection signal="mouse_entered" from="Canvas/Panel/MarginContainer/VBoxContainer/MarginContainer2/VBoxContainer/HowToBtn" to="." method="on_hover"]
 [connection signal="pressed" from="Canvas/Panel/MarginContainer/VBoxContainer/MarginContainer2/VBoxContainer/HowToBtn" to="." method="OpenHowTo"]
+[connection signal="mouse_entered" from="Canvas/Panel/MarginContainer/VBoxContainer/MarginContainer2/VBoxContainer/Quit" to="." method="on_hover"]
+[connection signal="pressed" from="Canvas/Panel/MarginContainer/VBoxContainer/MarginContainer2/VBoxContainer/Quit" to="." method="quit_game"]
 [connection signal="pressed" from="Canvas/HowToPanel/CloseHowToBtn" to="." method="CloseHowTo"]
