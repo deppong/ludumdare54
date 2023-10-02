@@ -6,12 +6,12 @@ var value:int = 2
 var numBoxes = 0
 var box = preload("res://objects/ammoBox.tscn")
 
-func _ready():
-	for i in range(player.ammoMax - numBoxes):
-		addBox()
-
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	if(player.ammoMax != numBoxes):
+		for i in range(player.ammoMax - numBoxes):
+			addBox()
+	numBoxes = player.ammoMax
 	if(recharge):
 		$VBoxContainer/ProgressBar.set_value_no_signal(pow((1-recharge.time_left/recharge.wait_time),1.5))
 	var i = 0
