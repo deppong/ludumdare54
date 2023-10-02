@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://hx3qkmweyhow"]
+
+[ext_resource type="Texture2D" uid="uid://cqyy7kl7nhtr3" path="res://art/Ammo.png" id="1_b4px5"]
+
+[node name="1" type="NinePatchRect"]
+size_flags_horizontal = 3
+texture = ExtResource("1_b4px5")
+region_rect = Rect2(0, 0, 128, 64)
+patch_margin_left = 10
+patch_margin_right = 42
+patch_margin_bottom = 5
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1

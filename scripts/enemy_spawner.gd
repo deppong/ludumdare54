@@ -4,6 +4,7 @@ extends Node
 var enemy_tscn = preload("res://objects/enemy.tscn")
 var mortar_enemy_tcsn = preload("res://objects/mortar_enemy.tscn")
 var melee_enemy_tcsn = preload("res://objects/melee_enemy.tscn")
+@onready var player = get_parent().get_node("Player")
 
 var scoreDisplay: RichTextLabel
 
@@ -41,6 +42,7 @@ func _process(_delta):
 	elif score in range(20, 30):
 		enemy_cap = 3
 		can_spawn_mortar = true
+		player.ammoMax = 3
 	elif score in range(30, 40):
 		enemy_cap = 4
 		can_spawn_melee = true
@@ -48,10 +50,12 @@ func _process(_delta):
 	elif score in range(40, 50):
 		enemy_cap = 5
 		can_spawn_melee = true
+		player.ammoMax = 4
 		$spawn_timer.wait_time = 4
 	elif score >60:
 		$spawn_timer.wait_time = 3.5
 		enemy_cap = 6+score/40
+		player.ammoMax = 5
 		
 	if score>=5 && !$AudioStreamPlayer.playing:
 		$AudioStreamPlayer.play()
