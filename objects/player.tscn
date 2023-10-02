@@ -140,9 +140,10 @@ position = Vector2(0, -145)
 collision_layer = 3
 motion_mode = 1
 script = ExtResource("1_1jluk")
-speed = 300.0
+speed = 350.0
 accel = 0.2
 deccel = 0.1
+initalSpd = 0.5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-1, -49)
