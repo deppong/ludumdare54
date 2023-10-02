@@ -147,9 +147,11 @@ text = "Close"
 
 [node name="hover_sound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("2_uolix")
+volume_db = -20.0
 
 [node name="click_sound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_gi7k8")
+volume_db = -20.0
 
 [connection signal="mouse_entered" from="Canvas/Panel/MarginContainer/VBoxContainer/MarginContainer2/VBoxContainer/PlayBtn" to="." method="on_hover"]
 [connection signal="pressed" from="Canvas/Panel/MarginContainer/VBoxContainer/MarginContainer2/VBoxContainer/PlayBtn" to="." method="StartGame"]
