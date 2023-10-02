@@ -119,11 +119,12 @@ theme_override_constants/margin_left = 80
 [node name="Label" type="Label" parent="Canvas/HowToPanel/VBoxContainer/MarginContainer2"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 51
-text = "You play the game
-that is how
-you play the game
+text = "You are a scientist trapped in what's left of reality. The demons that surround you launch deadly attacks from their shrouded world. Thankfully you have your radar with you. This device will ping the position of enemies twice in succesion, allowing you to track their next movements. Some enemies orbit you menacingly, and other launch attacks at you without moving.
 
-eazy lol !!!!! play video game"
+Controls:
+Use WASD to move and Mouse Left to shoot. 
+Hold Mouse Right for a brief period to activate your radar"
+autowrap_mode = 3
 
 [node name="CloseHowToBtn" type="Button" parent="Canvas/HowToPanel"]
 layout_mode = 0
