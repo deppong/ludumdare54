@@ -171,7 +171,8 @@ one_shot = true
 
 [node name="GUN" type="Sprite2D" parent="."]
 z_index = 1
-position = Vector2(3, -154)
+position = Vector2(0, -155)
+rotation = 1.58166
 texture = ExtResource("23_u61kk")
 centered = false
 offset = Vector2(-30, -100)
