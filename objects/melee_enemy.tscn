@@ -1,7 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://mw0rmemav6x7"]
+[gd_scene load_steps=9 format=3 uid="uid://mw0rmemav6x7"]
 
 [ext_resource type="Script" path="res://scripts/melee_enemy.gd" id="1_vbut2"]
-[ext_resource type="Texture2D" uid="uid://cph1qfbbhpa78" path="res://art/icon.svg" id="2_a2ksa"]
+[ext_resource type="AudioStream" uid="uid://cwu05c8w5671r" path="res://audio/MeleeEnemy.wav" id="3_cl4c6"]
+[ext_resource type="Texture2D" uid="uid://cdsrba6qvcsw6" path="res://art/particle.png" id="3_gw77o"]
+[ext_resource type="Texture2D" uid="uid://houbjcovd7nb" path="res://art/Untitled.png" id="4_qw2vy"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_53ipm"]
 radius = 70.0286
@@ -12,14 +14,22 @@ radius = 117.068
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_py5il"]
 size = Vector2(99, 97)
 
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_pwkwp"]
+lifetime_randomness = 0.15
+emission_shape = 1
+emission_sphere_radius = 40.88
+particle_flag_disable_z = true
+gravity = Vector3(0, 0, 0)
+orbit_velocity_min = 0.0
+orbit_velocity_max = 0.0
+angle_min = -720.0
+angle_max = 720.0
+color = Color(0, 0, 0, 1)
+
 [node name="melee_enemy" type="CharacterBody2D" groups=["enemy"]]
 collision_layer = 4
 collision_mask = 4
 script = ExtResource("1_vbut2")
-
-[node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(0.792969, 0.792969)
-texture = ExtResource("2_a2ksa")
 
 [node name="player_detection" type="Area2D" parent="."]
 
@@ -37,6 +47,20 @@ one_shot = true
 [node name="hitbox" type="CollisionShape2D" parent="."]
 position = Vector2(0.5, -0.5)
 shape = SubResource("RectangleShape2D_py5il")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_cl4c6")
+volume_db = 11.48
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+amount = 33
+process_material = SubResource("ParticleProcessMaterial_pwkwp")
+texture = ExtResource("3_gw77o")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+visible = false
+scale = Vector2(0.792969, 0.792969)
+texture = ExtResource("4_qw2vy")
 
 [connection signal="body_entered" from="player_detection" to="." method="_on_player_detection_body_entered"]
 [connection signal="timeout" from="explosion_delay" to="." method="_on_explosion_delay_timeout"]

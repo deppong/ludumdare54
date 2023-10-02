@@ -1,11 +1,16 @@
-[gd_scene load_steps=10 format=3 uid="uid://dgmixdjaa18m"]
+[gd_scene load_steps=13 format=3 uid="uid://dgmixdjaa18m"]
 
-[ext_resource type="Texture2D" uid="uid://cph1qfbbhpa78" path="res://art/icon.svg" id="1_1xmhw"]
+[ext_resource type="AudioStream" uid="uid://dotnnbyqj5pn8" path="res://audio/Laser 1.wav" id="1_1mntb"]
 [ext_resource type="Texture2D" uid="uid://bh1tsgoaln6sf" path="res://art/BeamGlow.png" id="2_1ikkh"]
+[ext_resource type="AudioStream" uid="uid://bo4lf0rctyl1n" path="res://audio/Laser 2.wav" id="2_h64rj"]
+[ext_resource type="AudioStream" uid="uid://dvev2r3ahdqjy" path="res://audio/Laser 3.wav" id="3_rfuvm"]
+[ext_resource type="SpriteFrames" uid="uid://b5fjlbx453jau" path="res://art/beamn.tres" id="4_8k766"]
+[ext_resource type="Script" path="res://objects/SFX.gd" id="6_s3gtw"]
 
 [sub_resource type="GDScript" id="GDScript_1688m"]
 script/source = "extends Node2D
 
+@export var laserSFX:Array[AudioStreamWAV]
 # Called when the node enters the scene tree for the first time.
 
 # TODO: make animation for enemy beam
@@ -27,22 +32,13 @@ func check_bodies():
 				item.player_take_damage()
 	$NinePatchRect.visible=true
 	$Area2D/AnimatedSprite2D.visible=false
-	
+	$SFX.set_stream(laserSFX[randi() % laserSFX.size()])
+	$SFX.play()
+	$SFX.reparent(get_parent())
 "
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2wk25"]
 size = Vector2(130, 127)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_erhro"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("1_1xmhw")
-}],
-"loop": true,
-"name": &"default",
-"speed": 5.0
-}]
 
 [sub_resource type="Animation" id="Animation_px7sy"]
 length = 0.001
@@ -229,6 +225,7 @@ visibility_layer = 2
 z_index = -1
 scale = Vector2(35.8, 0.36)
 script = SubResource("GDScript_1688m")
+laserSFX = Array[AudioStreamWAV]([ExtResource("1_1mntb"), ExtResource("2_h64rj"), ExtResource("3_rfuvm")])
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 0
@@ -239,7 +236,10 @@ position = Vector2(64.9998, -0.500005)
 shape = SubResource("RectangleShape2D_2wk25")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Area2D"]
-sprite_frames = SubResource("SpriteFrames_erhro")
+modulate = Color(1, 0, 0, 1)
+position = Vector2(0, 0.368925)
+scale = Vector2(1, 0.509983)
+sprite_frames = ExtResource("4_8k766")
 offset = Vector2(64.0196, 2)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Area2D"]
@@ -266,3 +266,8 @@ patch_margin_right = 60
 patch_margin_bottom = 60
 axis_stretch_horizontal = 2
 axis_stretch_vertical = 2
+
+[node name="SFX" type="AudioStreamPlayer2D" parent="."]
+script = ExtResource("6_s3gtw")
+
+[connection signal="finished" from="SFX" to="SFX" method="_on_finished"]

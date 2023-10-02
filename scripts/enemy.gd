@@ -7,6 +7,7 @@ var d = 0.0
 @export var radius = randf_range(400.0, 1000)
 @export var speed = randf_range(0.5, 1.0)
 
+
 signal enemy_died(score)
 
 var beam = preload("res://objects/enemy_beam.tscn")
@@ -34,6 +35,7 @@ func fire(direction: Vector2):
 	beamInst.position = position
 	beamInst.rotation = get_angle_to(direction)
 	get_parent().add_child(beamInst)
+	$Spawn.play()
 
 func _on_attack_timer_timeout():
 	fire(player.position)

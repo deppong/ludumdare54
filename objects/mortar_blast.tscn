@@ -1,10 +1,15 @@
-[gd_scene load_steps=14 format=3 uid="uid://blulylhfg2ob5"]
+[gd_scene load_steps=19 format=3 uid="uid://blulylhfg2ob5"]
 
 [ext_resource type="Script" path="res://scripts/mortar_blast.gd" id="1_sdeik"]
-[ext_resource type="SpriteFrames" path="res://art/Boom.res" id="2_17wy0"]
+[ext_resource type="AudioStream" uid="uid://cillr1j65nji2" path="res://audio/MortarExplode1.wav" id="2_3dy6y"]
+[ext_resource type="SpriteFrames" uid="uid://bwofcenphb00g" path="res://art/Boom.res" id="2_17wy0"]
 [ext_resource type="Texture2D" uid="uid://bay8bkkepjqhd" path="res://art/AOECircle.png" id="2_sctb7"]
 [ext_resource type="Texture2D" uid="uid://bh1tsgoaln6sf" path="res://art/BeamGlow.png" id="3_aw8u1"]
 [ext_resource type="Texture2D" uid="uid://bwserkbgk0pr7" path="res://art/Warning.png" id="3_ceru8"]
+[ext_resource type="AudioStream" uid="uid://b068bu31li28v" path="res://audio/MortarExplode2.wav" id="3_os2nn"]
+[ext_resource type="AudioStream" uid="uid://dej2l4qvxh2b2" path="res://audio/MortarExplode3.wav" id="4_x1w3x"]
+[ext_resource type="AudioStream" uid="uid://c226ofavwiedi" path="res://audio/Explode.wav" id="9_m6367"]
+[ext_resource type="Script" path="res://objects/SFX.gd" id="10_hr0v5"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_yd3ct"]
 radius = 90.1388
@@ -430,6 +435,7 @@ self_modulate = Color(1, 1, 1, 0)
 visibility_layer = 2
 z_index = -1
 script = ExtResource("1_sdeik")
+laserSFX = Array[AudioStreamWAV]([ExtResource("2_3dy6y"), ExtResource("3_os2nn"), ExtResource("4_x1w3x")])
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 0
@@ -462,3 +468,10 @@ root_node = NodePath("../..")
 libraries = {
 "": SubResource("AnimationLibrary_63hkf")
 }
+
+[node name="Explode" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("9_m6367")
+script = ExtResource("10_hr0v5")
+
+[node name="SFX" type="AudioStreamPlayer2D" parent="."]
+script = ExtResource("10_hr0v5")

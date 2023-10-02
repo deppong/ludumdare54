@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://dogmmm25rvd6e"]
+[gd_scene load_steps=30 format=3 uid="uid://dogmmm25rvd6e"]
 
 [ext_resource type="Script" path="res://scripts/PlayerScript.gd" id="1_1jluk"]
 [ext_resource type="Texture2D" uid="uid://dr5wj86t3qx0c" path="res://art/PlayerFrames/Dstand.png" id="2_p40yq"]
@@ -24,6 +24,9 @@
 [ext_resource type="Texture2D" uid="uid://bakj16ywwvlnj" path="res://art/PlayerFrames/Uwalk4.png" id="21_wkhoi"]
 [ext_resource type="Texture2D" uid="uid://bn0anxb2ov3te" path="res://art/Gun.png" id="23_u61kk"]
 [ext_resource type="Script" path="res://objects/GUN.gd" id="24_fq3bt"]
+[ext_resource type="AudioStream" uid="uid://ihfpyfjog164" path="res://audio/Radar1.wav" id="25_0vwj0"]
+[ext_resource type="AudioStream" uid="uid://cxwiugltshukg" path="res://audio/Radar2.wav" id="26_yf63t"]
+[ext_resource type="AudioStream" uid="uid://bj713mus3bw2p" path="res://audio/Gun.wav" id="27_kdwv0"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_koeyb"]
 radius = 84.9999
@@ -146,6 +149,11 @@ position = Vector2(-1, -49)
 scale = Vector2(0.800001, 0.559999)
 shape = SubResource("CapsuleShape2D_koeyb")
 
+[node name="AudioListener2D" type="AudioListener2D" parent="CollisionShape2D"]
+position = Vector2(1.25, 87.5002)
+scale = Vector2(1.25, 1.78572)
+current = true
+
 [node name="Sprite2D" type="Sprite2D" parent="."]
 modulate = Color(0.0352941, 0.0352941, 0.0352941, 0.686275)
 position = Vector2(-2, 6)
@@ -184,6 +192,18 @@ position = Vector2(201.901, -10.194)
 
 [node name="RadarCoolDown" type="Timer" parent="."]
 one_shot = true
+
+[node name="Ping A" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("25_0vwj0")
+volume_db = -20.0
+
+[node name="Ping B" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("26_yf63t")
+volume_db = -20.0
+
+[node name="Gun" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("27_kdwv0")
+volume_db = -19.477
 
 [connection signal="timeout" from="AmmoCharge" to="." method="reload"]
 [connection signal="timeout" from="RadarCharge" to="." method="radar"]

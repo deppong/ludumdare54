@@ -4,7 +4,7 @@ extends CharacterBody2D
 @export var accel: float = .1
 @export var deccel: float = .2
 @export var initalSpd: float = .2
-@export var health: int = 3
+@export var health: float = 3
 @export var ammoMax: int = 2
 
 var gameOver = false
@@ -22,6 +22,11 @@ var hurt = preload("res://objects/player_hurt_particle.tscn")
 
 var vel: Vector2
 var lastDir: Vector2
+
+var healRate:float = 0
+
+func _process(delta):
+	heal()
 	
 func movement():
 	# player can't process movement code if pinging
@@ -50,6 +55,7 @@ func movement():
 	move_and_slide()
 
 func actions():
+	
 	if(gameOver):
 		pinging = false
 		$RadarCharge.stop()
@@ -66,6 +72,7 @@ func actions():
 			ammo-=1
 			$AmmoCharge.start()
 			ammo_changed.emit(ammo)
+			$Gun.play()
 	
 	if (Input.is_action_just_pressed("Radar") && can_ping):
 		$RadarCharge.start()
@@ -84,10 +91,11 @@ func radar():
 	$RadarCoolDown.start()
 	start_cooldown.emit()
 	can_ping = false
+	$"Ping A".play()
 
 func radar2():
 	var enemies = get_tree().get_nodes_in_group("enemy")
-	
+	$"Ping B".play()
 	for enemy in enemies:
 		if enemy.has_method("radar_ping"):
 			enemy.radar_ping()
@@ -107,13 +115,14 @@ func player_take_damage():
 	if(health<=0):
 		return
 	health-=1
+	healRate=0
 	health_changed.emit(health)
 	var hurtParticle = hurt.instantiate()
 	hurtParticle.global_position = global_position + Vector2(0,-80)
 	hurtParticle.emitting = true
 	get_parent().add_child(hurtParticle)
 	
-	if (health == 0):
+	if (health <= 0):
 		print_debug("Game is over dude")
 		dead()
 #update animations for moving in each direction
@@ -135,7 +144,14 @@ func updateAnims(dir,walking):
 			if(dir.y<0): $AnimatedSprite2D.play("Uwalk")
 			else: $AnimatedSprite2D.play("Dwalk")
 	
-
+func heal():
+	if health >0.01 && health <3:
+		health+=healRate
+		healRate+=0.000001
+		health_changed.emit(health)
+	elif health >3:
+		health = min(health,3)
+		healRate = 0
 func dead():
 	var fadeout = get_parent().get_node("EndParticle/FadeoutBg")
 	fadeout.show()

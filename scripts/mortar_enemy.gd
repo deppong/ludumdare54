@@ -10,7 +10,7 @@ var d = 0.0
 signal enemy_died(score)
 
 var blast = preload("res://objects/mortar_blast.tscn")
-var ping = preload("res://objects/ping.tscn")
+var ping = preload("res://objects/MortarPing.tscn")
 var particle = preload("res://objects/enemy_explode.tscn")
 
 # Helper script in case the player is completely missing from the scene
@@ -32,7 +32,7 @@ func fire(direction: Vector2):
 	var blastInst = blast.instantiate()
 	blastInst.position = direction
 	get_parent().add_child(blastInst)
-	
+	$Charge.play()
 	radar_ping()
 
 func _on_attack_timer_timeout():

@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://c76ljtfxo7xq2"]
+[gd_scene load_steps=5 format=3 uid="uid://c76ljtfxo7xq2"]
 
 [ext_resource type="Script" path="res://scripts/enemy.gd" id="1_n6urs"]
 [ext_resource type="Texture2D" uid="uid://cph1qfbbhpa78" path="res://art/icon.svg" id="2_3fmat"]
+[ext_resource type="AudioStream" uid="uid://cqfhlv8skqrjd" path="res://audio/SpawnOrbiter.wav" id="3_bmvo6"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_iq1kk"]
 radius = 51.0
@@ -23,5 +24,8 @@ texture = ExtResource("2_3fmat")
 [node name="attack_timer" type="Timer" parent="."]
 wait_time = 3.0
 autostart = true
+
+[node name="Spawn" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_bmvo6")
 
 [connection signal="timeout" from="attack_timer" to="." method="_on_attack_timer_timeout"]

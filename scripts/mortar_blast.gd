@@ -1,5 +1,6 @@
 extends Node2D
 
+@export var laserSFX:Array[AudioStreamWAV]
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	var anim: AnimationPlayer = $Area2D/AnimationPlayer
@@ -12,3 +13,10 @@ func deal_damage():
 			if(body.has_method("player_take_damage")):
 				print_debug("killed enemy")
 				body.player_take_damage()
+				
+	$SFX.set_stream(laserSFX[randi() % laserSFX.size()])
+	$SFX.play()
+	$Explode.play()
+	$Explode.reparent(get_parent())
+	$SFX.reparent(get_parent())
+	

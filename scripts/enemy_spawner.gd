@@ -12,6 +12,7 @@ enum enemy_types {BEAM, MORTAR, MELEE}
 # numbers
 var score = 0
 var enemy_count = 0
+var multiplier = 0
 
 # Flags
 var can_spawn_mortar: bool = false
@@ -32,9 +33,9 @@ func _process(_delta):
 	
 	enemy_count = len(enemies)
 	
-	if score in range(0, 10):
+	if score in range(0, 5):
 		enemy_cap = 1
-	elif score in range(10, 20):
+	elif score in range(5, 20):
 		enemy_cap = 2
 		$spawn_timer.wait_time = 5.0
 	elif score in range(20, 30):
@@ -43,11 +44,23 @@ func _process(_delta):
 	elif score in range(30, 40):
 		enemy_cap = 4
 		can_spawn_melee = true
+		$spawn_timer.wait_time = 4.5
+	elif score in range(40, 50):
+		enemy_cap = 5
+		can_spawn_melee = true
+		$spawn_timer.wait_time = 4
+	elif score >60:
+		$spawn_timer.wait_time = 3.5
+		enemy_cap = 6+score/40
+		
+	if score>=5 && !$AudioStreamPlayer.playing:
+		$AudioStreamPlayer.play()
 
 func increase_score(reward):
-	score+=reward
+	score+=reward #*(1+multiplier)
+	#multiplier+=0.2
 	print_debug(score)
-	scoreDisplay.text = "[center]"+ format_score(str(score))
+	scoreDisplay.text = "[center]"+ format_score(str(score*100))
 	
 func format_score(sc : String) -> String:
 	var i: int = sc.length() - 3
@@ -87,3 +100,7 @@ func _on_spawn_timer_timeout():
 	
 	spawn_enemy(types_to_spawn[randi() % len(types_to_spawn)])
 	#spawn_enemy(enemy_types.MELEE)
+
+
+func _on_player_health_changed(health_val):
+	multiplier = 0

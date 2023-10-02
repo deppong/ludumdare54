@@ -28,8 +28,13 @@ func _ready():
 
 func _physics_process(delta):
 	if (sploding): return
-	
 	velocity = (player.position - position).normalized() * 100
+	if (player.position - position).length()<500:
+		if !$AudioStreamPlayer2D.playing:
+			$AudioStreamPlayer2D.play()
+		velocity*=3
+	if (player.position - position).length()<250:
+		$Sprite2D.visible = true
 	move_and_slide()
 
 func _on_explosion_delay_timeout():

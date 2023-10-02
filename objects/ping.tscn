@@ -9,6 +9,8 @@
 sprite_frames = ExtResource("1_cna05")
 animation = &"Ping"
 autoplay = "Ping"
+frame = 61
+frame_progress = 1.0
 script = ExtResource("2_vrebs")
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
