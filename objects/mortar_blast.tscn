@@ -1,6 +1,7 @@
-[gd_scene load_steps=13 format=3 uid="uid://blulylhfg2ob5"]
+[gd_scene load_steps=14 format=3 uid="uid://blulylhfg2ob5"]
 
 [ext_resource type="Script" path="res://scripts/mortar_blast.gd" id="1_sdeik"]
+[ext_resource type="SpriteFrames" uid="uid://bwofcenphb00g" path="res://art/Boom.res" id="2_17wy0"]
 [ext_resource type="Texture2D" uid="uid://bay8bkkepjqhd" path="res://art/AOECircle.png" id="2_sctb7"]
 [ext_resource type="Texture2D" uid="uid://bh1tsgoaln6sf" path="res://art/BeamGlow.png" id="3_aw8u1"]
 [ext_resource type="Texture2D" uid="uid://bwserkbgk0pr7" path="res://art/Warning.png" id="3_ceru8"]
@@ -255,6 +256,105 @@ tracks/9/keys = {
 "points": PackedFloat32Array(1, -0.25, 0, 0.25, 0, 0, -0.231853, 1.16892, 0.25, 0),
 "times": PackedFloat32Array(-0.0183849, 0.706795)
 }
+tracks/10/type = "bezier"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("Area2D/AnimatedSprite2D2:frame")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0, 14.3049, 31, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.7, 1.2)
+}
+tracks/11/type = "bezier"
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/path = NodePath("Area2D/AnimatedSprite2D2:modulate:r")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/keys = {
+"handle_modes": PackedInt32Array(),
+"points": PackedFloat32Array(),
+"times": PackedFloat32Array()
+}
+tracks/12/type = "bezier"
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/path = NodePath("Area2D/AnimatedSprite2D2:modulate:g")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/keys = {
+"handle_modes": PackedInt32Array(),
+"points": PackedFloat32Array(),
+"times": PackedFloat32Array()
+}
+tracks/13/type = "bezier"
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/path = NodePath("Area2D/AnimatedSprite2D2:modulate:b")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/keys = {
+"handle_modes": PackedInt32Array(),
+"points": PackedFloat32Array(),
+"times": PackedFloat32Array()
+}
+tracks/14/type = "bezier"
+tracks/14/imported = false
+tracks/14/enabled = true
+tracks/14/path = NodePath("Area2D/AnimatedSprite2D2:modulate:a")
+tracks/14/interp = 1
+tracks/14/loop_wrap = true
+tracks/14/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, -0.0101683, -0.25, 0, 1.38162, 0.0105787, 1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.6, 0.7)
+}
+tracks/15/type = "bezier"
+tracks/15/imported = false
+tracks/15/enabled = true
+tracks/15/path = NodePath("Area2D/AnimatedSprite2D:modulate:r")
+tracks/15/interp = 1
+tracks/15/loop_wrap = true
+tracks/15/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.72799, 0.758014)
+}
+tracks/16/type = "bezier"
+tracks/16/imported = false
+tracks/16/enabled = true
+tracks/16/path = NodePath("Area2D/AnimatedSprite2D:modulate:g")
+tracks/16/interp = 1
+tracks/16/loop_wrap = true
+tracks/16/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(-0.00909108, 0.71866, 0.755981)
+}
+tracks/17/type = "bezier"
+tracks/17/imported = false
+tracks/17/enabled = true
+tracks/17/path = NodePath("Area2D/AnimatedSprite2D:modulate:b")
+tracks/17/interp = 1
+tracks/17/loop_wrap = true
+tracks/17/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.7, 0.755981)
+}
+tracks/18/type = "bezier"
+tracks/18/imported = false
+tracks/18/enabled = true
+tracks/18/path = NodePath("Area2D/AnimatedSprite2D:modulate:a")
+tracks/18/interp = 1
+tracks/18/loop_wrap = true
+tracks/18/keys = {
+"handle_modes": PackedInt32Array(),
+"points": PackedFloat32Array(),
+"times": PackedFloat32Array()
+}
 
 [sub_resource type="Animation" id="Animation_ghkfr"]
 resource_name = "player_beam_fadeOut"
@@ -338,8 +438,12 @@ collision_mask = 2
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("CircleShape2D_yd3ct")
 
+[node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="Area2D"]
+position = Vector2(-1, -9.53674e-07)
+sprite_frames = ExtResource("2_17wy0")
+frame = 30
+
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Area2D"]
-modulate = Color(1, 0, 0.0235294, 1)
 material = SubResource("CanvasItemMaterial_afser")
 position = Vector2(-1, -9.53674e-07)
 scale = Vector2(0.68198, 0.699999)
