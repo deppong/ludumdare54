@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://7r0bovkwx31y"]
 
-[ext_resource type="Script" path="res://SCRIPTS/Pause.gd" id="1_o8kte"]
+[ext_resource type="Script" path="res://scripts/Pause.gd" id="1_duxch"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_atip7"]
 bg_color = Color(0.176471, 0.168627, 0.180392, 0.823529)
@@ -9,7 +9,7 @@ bg_color = Color(0.176471, 0.168627, 0.180392, 0.823529)
 visible = false
 offset = Vector2(-960, -540)
 transform = Transform2D(1, 0, 0, 1, -960, -540)
-script = ExtResource("1_o8kte")
+script = ExtResource("1_duxch")
 
 [node name="Panel" type="Panel" parent="."]
 z_index = 2
