@@ -12,4 +12,3 @@ func _on_restart_pressed():
 func _on_exit_pressed():
 	queue_free()
 	get_tree().quit()
-	pass # Replace with function body.
