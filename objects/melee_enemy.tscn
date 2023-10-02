@@ -1,20 +1,35 @@
-[gd_scene load_steps=4 format=3 uid="uid://mw0rmemav6x7"]
+[gd_scene load_steps=5 format=3 uid="uid://mw0rmemav6x7"]
 
 [ext_resource type="Script" path="res://scripts/melee_enemy.gd" id="1_vbut2"]
 [ext_resource type="Texture2D" uid="uid://cph1qfbbhpa78" path="res://art/icon.svg" id="2_a2ksa"]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_iq1kk"]
-radius = 51.0
-height = 104.0
+[sub_resource type="CircleShape2D" id="CircleShape2D_53ipm"]
+radius = 70.0286
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_kq241"]
+radius = 117.068
 
 [node name="melee_enemy" type="CharacterBody2D" groups=["enemy"]]
 collision_layer = 6
 collision_mask = 6
 script = ExtResource("1_vbut2")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CapsuleShape2D_iq1kk")
-
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.792969, 0.792969)
 texture = ExtResource("2_a2ksa")
+
+[node name="player_detection" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="player_detection"]
+shape = SubResource("CircleShape2D_53ipm")
+
+[node name="damage" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="damage"]
+shape = SubResource("CircleShape2D_kq241")
+
+[node name="explosion_delay" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="body_entered" from="player_detection" to="." method="_on_player_detection_body_entered"]
+[connection signal="timeout" from="explosion_delay" to="." method="_on_explosion_delay_timeout"]

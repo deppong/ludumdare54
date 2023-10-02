@@ -13,6 +13,8 @@ signal enemy_died(score)
 var ping = preload("res://objects/ping.tscn")
 var particle = preload("res://objects/enemy_explode.tscn")
 
+var sploding = false
+
 # Helper script in case the player is completely missing from the scene
 func get_player():
 	var nodes = get_tree().get_nodes_in_group("player")
@@ -25,15 +27,19 @@ func _ready():
 	pass
 
 func _physics_process(delta):
+	if (sploding): return
+	
 	velocity = (player.position - position).normalized() * 100
 	move_and_slide()
 
-func fire(direction: Vector2):
-	pass
+func _on_explosion_delay_timeout():
+	if($damage.has_overlapping_bodies()):
+		var overlap = $damage.get_overlapping_bodies() #node2d array
+		for item in overlap:
+			if(item.has_method("player_take_damage")):
+				item.player_take_damage()
+	queue_free()
 
-func radar_ping():
-	pass
-	
 
 func enemy_take_damage():
 	# ENEMY DIED :(
@@ -43,3 +49,13 @@ func enemy_take_damage():
 	part.emitting = true
 	enemy_died.emit(2)
 	queue_free()
+
+
+func _on_player_detection_body_entered(body):
+	if (body.is_in_group("player")):
+		sploding = true
+		$explosion_delay.start()
+
+func radar_ping():
+	pass
+

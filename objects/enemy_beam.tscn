@@ -1,7 +1,6 @@
-[gd_scene load_steps=10 format=3 uid="uid://dgmixdjaa18m"]
+[gd_scene load_steps=9 format=3 uid="uid://dgmixdjaa18m"]
 
 [ext_resource type="Texture2D" uid="uid://cph1qfbbhpa78" path="res://art/icon.svg" id="1_1xmhw"]
-[ext_resource type="Texture2D" uid="uid://bh1tsgoaln6sf" path="res://art/BeamGlow.png" id="2_1ikkh"]
 
 [sub_resource type="GDScript" id="GDScript_1688m"]
 script/source = "extends Node2D
@@ -25,8 +24,6 @@ func check_bodies():
 		for item in overlap:
 			if(item.has_method(\"player_take_damage\")):
 				item.player_take_damage()
-	$NinePatchRect.visible=true
-	$Area2D/AnimatedSprite2D.visible=false
 	
 "
 
@@ -247,22 +244,3 @@ root_node = NodePath("../..")
 libraries = {
 "": SubResource("AnimationLibrary_63hkf")
 }
-
-[node name="NinePatchRect" type="NinePatchRect" parent="."]
-visible = false
-anchors_preset = 4
-anchor_top = 0.5
-anchor_bottom = 0.5
-offset_top = -60.0
-offset_right = 4956.0
-offset_bottom = 60.0
-grow_vertical = 2
-scale = Vector2(0.03, 1)
-texture = ExtResource("2_1ikkh")
-region_rect = Rect2(0, 0, 128, 128)
-patch_margin_left = 60
-patch_margin_top = 60
-patch_margin_right = 60
-patch_margin_bottom = 60
-axis_stretch_horizontal = 2
-axis_stretch_vertical = 2
