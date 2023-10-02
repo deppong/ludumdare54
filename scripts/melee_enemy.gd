@@ -47,6 +47,7 @@ func _on_explosion_delay_timeout():
 	get_parent().add_child(part)
 	part.position = position
 	part.emitting = true
+	ReparentParticles()
 	queue_free()
 
 
@@ -57,8 +58,16 @@ func enemy_take_damage():
 	part.position = position
 	part.emitting = true
 	enemy_died.emit(2)
+	ReparentParticles()
 	queue_free()
 
+func ReparentParticles():
+	var particles = $TrailParticles
+	particles.emitting = false
+	$TrailParticles/Timer.start()
+	remove_child(particles)
+	get_parent().add_child(particles)
+	
 
 func _on_player_detection_body_entered(body):
 	if (body.is_in_group("player")):

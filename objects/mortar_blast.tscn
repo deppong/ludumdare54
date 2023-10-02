@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scripts/mortar_blast.gd" id="1_sdeik"]
 [ext_resource type="AudioStream" uid="uid://cillr1j65nji2" path="res://audio/MortarExplode1.wav" id="2_3dy6y"]
-[ext_resource type="SpriteFrames" path="res://art/Boom.res" id="2_17wy0"]
+[ext_resource type="SpriteFrames" uid="uid://bwofcenphb00g" path="res://art/Boom.res" id="2_17wy0"]
 [ext_resource type="Texture2D" uid="uid://bay8bkkepjqhd" path="res://art/AOECircle.png" id="2_sctb7"]
 [ext_resource type="Texture2D" uid="uid://bh1tsgoaln6sf" path="res://art/BeamGlow.png" id="3_aw8u1"]
 [ext_resource type="Texture2D" uid="uid://bwserkbgk0pr7" path="res://art/Warning.png" id="3_ceru8"]
@@ -465,6 +465,7 @@ texture = ExtResource("3_ceru8")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Area2D"]
 root_node = NodePath("../..")
+speed_scale = 0.8
 libraries = {
 "": SubResource("AnimationLibrary_63hkf")
 }

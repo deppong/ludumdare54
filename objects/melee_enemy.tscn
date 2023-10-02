@@ -1,8 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://mw0rmemav6x7"]
+[gd_scene load_steps=14 format=3 uid="uid://mw0rmemav6x7"]
 
 [ext_resource type="Script" path="res://scripts/melee_enemy.gd" id="1_vbut2"]
 [ext_resource type="AudioStream" uid="uid://cwu05c8w5671r" path="res://audio/MeleeEnemy.wav" id="3_cl4c6"]
 [ext_resource type="Texture2D" uid="uid://cdsrba6qvcsw6" path="res://art/particle.png" id="3_gw77o"]
+[ext_resource type="Script" path="res://scripts/enemy_explode.gd" id="4_ofmtq"]
 [ext_resource type="Texture2D" uid="uid://houbjcovd7nb" path="res://art/Untitled.png" id="4_qw2vy"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_53ipm"]
@@ -14,6 +15,20 @@ radius = 117.068
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_py5il"]
 size = Vector2(99, 97)
 
+[sub_resource type="Gradient" id="Gradient_5o3om"]
+offsets = PackedFloat32Array(0, 0.162651, 0.343374, 1)
+colors = PackedColorArray(0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_vvq01"]
+gradient = SubResource("Gradient_5o3om")
+
+[sub_resource type="Curve" id="Curve_uqg5o"]
+_data = [Vector2(0, 0.610526), 0.0, 1.09141, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_03d82"]
+curve = SubResource("Curve_uqg5o")
+
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_pwkwp"]
 lifetime_randomness = 0.15
 emission_shape = 1
@@ -24,7 +39,9 @@ orbit_velocity_min = 0.0
 orbit_velocity_max = 0.0
 angle_min = -720.0
 angle_max = 720.0
+scale_curve = SubResource("CurveTexture_03d82")
 color = Color(0, 0, 0, 1)
+color_ramp = SubResource("GradientTexture1D_vvq01")
 
 [node name="melee_enemy" type="CharacterBody2D" groups=["enemy"]]
 collision_layer = 4
@@ -52,10 +69,13 @@ shape = SubResource("RectangleShape2D_py5il")
 stream = ExtResource("3_cl4c6")
 volume_db = 11.48
 
-[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+[node name="TrailParticles" type="GPUParticles2D" parent="."]
 amount = 33
 process_material = SubResource("ParticleProcessMaterial_pwkwp")
 texture = ExtResource("3_gw77o")
+script = ExtResource("4_ofmtq")
+
+[node name="Timer" type="Timer" parent="TrailParticles"]
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 visible = false
@@ -64,3 +84,4 @@ texture = ExtResource("4_qw2vy")
 
 [connection signal="body_entered" from="player_detection" to="." method="_on_player_detection_body_entered"]
 [connection signal="timeout" from="explosion_delay" to="." method="_on_explosion_delay_timeout"]
+[connection signal="timeout" from="TrailParticles/Timer" to="TrailParticles" method="_on_timer_timeout"]

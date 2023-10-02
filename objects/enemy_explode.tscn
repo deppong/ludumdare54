@@ -4,22 +4,23 @@
 [ext_resource type="Script" path="res://scripts/enemy_explode.gd" id="2_3t2og"]
 [ext_resource type="AudioStream" uid="uid://gehlq8sv3on8" path="res://audio/EnemyDie.wav" id="3_oo2jr"]
 
-[sub_resource type="Gradient" id="Gradient_dgm23"]
-offsets = PackedFloat32Array(0, 0.457317, 1)
-colors = PackedColorArray(4.47616e-06, 0.629913, 0.315279, 1, 0.640637, 0.393484, 3.85046e-07, 1, 0.368901, 0.765911, 1, 1)
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_qcdj2"]
-gradient = SubResource("Gradient_dgm23")
-
 [sub_resource type="Gradient" id="Gradient_5yyem"]
-colors = PackedColorArray(1, 1, 1, 1, 0.55, 0.430833, 0, 0)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_obpy5"]
 gradient = SubResource("Gradient_5yyem")
 
+[sub_resource type="Curve" id="Curve_f0ny7"]
+max_value = 100.0
+_data = [Vector2(0, 10.5263), 0.0, 0.0, 0, 0, Vector2(1, 17.8947), 14.1388, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_3beqm"]
+curve = SubResource("Curve_f0ny7")
+
 [sub_resource type="Curve" id="Curve_wg4j2"]
-_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.495822, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -1.00772, 0.0, 0, 0]
-point_count = 3
+_data = [Vector2(0, 1), 0.0, -2.55223, 0, 0, Vector2(1, 0), -0.0398785, 0.0, 0, 0]
+point_count = 2
 
 [sub_resource type="CurveTexture" id="CurveTexture_dha7n"]
 curve = SubResource("Curve_wg4j2")
@@ -28,37 +29,35 @@ curve = SubResource("Curve_wg4j2")
 lifetime_randomness = 0.6
 particle_flag_disable_z = true
 direction = Vector3(0, -1, 0)
-spread = 40.0
-gravity = Vector3(0, 240, 0)
-initial_velocity_min = 80.0
-initial_velocity_max = 350.0
+spread = 180.0
+gravity = Vector3(0, 0, 0)
+initial_velocity_min = 250.0
+initial_velocity_max = 700.0
 angular_velocity_min = -150.0
 angular_velocity_max = 150.0
 orbit_velocity_min = 0.0
 orbit_velocity_max = 0.0
-scale_min = 0.3
-scale_max = 0.6
+damping_min = 20.0
+damping_max = 100.0
+damping_curve = SubResource("CurveTexture_3beqm")
+scale_min = 0.5
+scale_max = 1.2
 scale_curve = SubResource("CurveTexture_dha7n")
-color = Color(0.85098, 0.309804, 1, 1)
 color_ramp = SubResource("GradientTexture1D_obpy5")
-color_initial_ramp = SubResource("GradientTexture1D_qcdj2")
 
 [node name="GPUParticles2D" type="GPUParticles2D"]
-modulate = Color(1, 1, 1, 0)
 z_index = 1
 z_as_relative = false
 emitting = false
-amount = 40
+amount = 15
 process_material = SubResource("ParticleProcessMaterial_sn4ei")
 texture = ExtResource("1_q4ab8")
-lifetime = 2.0
 one_shot = true
-explosiveness = 0.9
+explosiveness = 1.0
 randomness = 0.4
 script = ExtResource("2_3t2og")
 
 [node name="Timer" type="Timer" parent="."]
-wait_time = 4.0
 one_shot = true
 autostart = true
 
