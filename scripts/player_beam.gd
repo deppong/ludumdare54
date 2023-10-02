@@ -4,6 +4,7 @@ extends Node2D
 func _ready():
 	var anim: AnimationPlayer = $Area2D/AnimationPlayer
 	anim.play("player_beam_fadeOut")
+	$NinePatchRect/CPUParticles2D.emitting = true
 
 func _process(_delta):
 	pass

@@ -50,8 +50,9 @@ func actions():
 		if (Input.is_action_just_pressed("Fire")&&ammo>0):
 			var beamInst:Node2D = beam.instantiate()
 			get_parent().add_child(beamInst)
-			beamInst.position = position
-			beamInst.rotation = get_angle_to(get_global_mouse_position())
+			beamInst.global_position = $GUN/Muzzle.global_position
+			var target = (get_global_mouse_position() - $GUN/Muzzle.global_position).normalized()
+			beamInst.rotation = target.angle() 
 			ammo-=1
 			$AmmoCharge.start()
 			ammo_changed.emit(ammo)

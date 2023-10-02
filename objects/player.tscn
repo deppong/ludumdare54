@@ -178,6 +178,9 @@ centered = false
 offset = Vector2(-30, -100)
 script = ExtResource("24_fq3bt")
 
+[node name="Muzzle" type="Node2D" parent="GUN"]
+position = Vector2(201.901, -10.194)
+
 [connection signal="timeout" from="AmmoCharge" to="." method="reload"]
 [connection signal="timeout" from="RadarCharge" to="." method="radar"]
 [connection signal="timeout" from="TwoPing" to="." method="radar2"]
