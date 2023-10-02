@@ -7,6 +7,7 @@
 [sub_resource type="SystemFont" id="SystemFont_ai3qb"]
 font_names = PackedStringArray("Bahnschrift")
 font_weight = 999
+subpixel_positioning = 0
 
 [node name="Healthbar" type="Control" node_paths=PackedStringArray("boxes")]
 z_index = 2
