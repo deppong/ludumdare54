@@ -23,12 +23,11 @@ func _process(delta):
 	
 	if (on_cd):
 		ping_on_cooldown()
+	elif (recharge.time_left == 0):
+		$ProgressBar.set_value_no_signal(0)
 	else:
-		if (recharge.time_left == 0):
-			$ProgressBar.set_value_no_signal(0)
-		else:
-			$ProgressBar.modulate = Color(1, 1, 1, 1)
-			$ProgressBar.set_value_no_signal(pow((1-recharge.time_left/recharge.wait_time), 1.5))
+		$ProgressBar.modulate = Color(1, 1, 1, 1)
+		$ProgressBar.set_value_no_signal(pow((1-recharge.time_left/recharge.wait_time), 1.5))
 
 
 func ping_on_cooldown():
