@@ -5,6 +5,8 @@ var enemy_tscn = preload("res://objects/enemy.tscn")
 var mortar_enemy_tcsn = preload("res://objects/mortar_enemy.tscn")
 var melee_enemy_tcsn = preload("res://objects/melee_enemy.tscn")
 
+var scoreDisplay: RichTextLabel
+
 enum enemy_types {BEAM, MORTAR, MELEE}
 
 # numbers
@@ -18,6 +20,8 @@ var enemy_cap = 5
 
 func _ready():
 	$spawn_timer.wait_time = 8.0
+	scoreDisplay = get_parent().get_node("ScoreCanvas/ScoreLabel")
+	scoreDisplay.text = "[center]"+ format_score(str(0))
 
 func _process(_delta):
 	# Connect the enemies death signal to the function that increases our total score
@@ -42,7 +46,14 @@ func _process(_delta):
 func increase_score(reward):
 	score+=reward
 	print_debug(score)
+	scoreDisplay.text = "[center]"+ format_score(str(score))
 	
+func format_score(sc : String) -> String:
+	var i: int = sc.length() - 3
+	while i > 0:
+		sc = sc.insert(i, ",")
+		i = i - 3
+	return sc
 
 func spawn_enemy(type):
 	var enemy

@@ -7,6 +7,7 @@ extends CharacterBody2D
 @export var health: int = 3
 @export var ammoMax: int = 2
 
+var gameOver = false
 var ammo:int = 2
 
 var pinging: bool = false
@@ -15,6 +16,7 @@ signal health_changed(health_val)
 signal ammo_changed(ammo_val)
 
 var beam = preload("res://objects/player_beam.tscn")
+var hurt = preload("res://objects/player_hurt_particle.tscn")
 
 var vel: Vector2
 var lastDir: Vector2
@@ -25,7 +27,7 @@ func movement():
 	
 	var dir = Input.get_vector("MoveLeft","MoveRight","MoveUp","MoveDown") 
 	dir = dir.normalized()
-	if(pinging):
+	if(pinging or gameOver):
 		dir = Vector2(0,0)
 	updateAnims(get_global_mouse_position()-position,dir.length()>0)
 	if(dir.x != 0):
@@ -46,6 +48,11 @@ func movement():
 	move_and_slide()
 
 func actions():
+	if(gameOver):
+		pinging = false
+		$RadarCharge.stop()
+		return
+	
 	if (!pinging):
 		if (Input.is_action_just_pressed("Fire")&&ammo>0):
 			var beamInst:Node2D = beam.instantiate()
@@ -91,8 +98,14 @@ func _physics_process(delta):
 	movement()
 	
 func player_take_damage():
+	if(health<=0):
+		return
 	health-=1
 	health_changed.emit(health)
+	var hurtParticle = hurt.instantiate()
+	hurtParticle.global_position = global_position + Vector2(0,-80)
+	hurtParticle.emitting = true
+	get_parent().add_child(hurtParticle)
 	
 	if (health == 0):
 		print_debug("Game is over dude")
@@ -123,8 +136,13 @@ func dead():
 	get_parent().get_node("EndParticle").emitting = true
 	var anim: AnimationPlayer = fadeout.get_node("FadeAnim")
 	anim.play("end_fade_out")
-	
+	gameOver = true
+	get_parent().get_node("Healthbar").hide()
+	get_parent().get_node("AmmoBar").hide()
+	get_parent().get_node("ping_bar").hide()
+	hide()
 
 func showGameOverMenu():
+	
 	get_parent().get_node("GameOverPanel").show()
 	get_parent().get_node("GameOverPanel/GameOverParticle").emitting = true

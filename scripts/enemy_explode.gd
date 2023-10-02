@@ -12,5 +12,6 @@ func _process(delta):
 
 
 func _on_timer_timeout():
+	print("clearing particle")
 	queue_free()
 	pass # Replace with function body.
