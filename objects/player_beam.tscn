@@ -196,10 +196,10 @@ axis_stretch_horizontal = 2
 axis_stretch_vertical = 2
 
 [node name="CPUParticles2D" type="CPUParticles2D" parent="NinePatchRect"]
+visible = false
 material = SubResource("CanvasItemMaterial_b23i7")
 position = Vector2(1171.32, 60)
 emitting = false
-amount = 100
 lifetime = 3.0
 one_shot = true
 explosiveness = 1.0
