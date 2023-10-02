@@ -38,6 +38,10 @@ func _on_explosion_delay_timeout():
 		for item in overlap:
 			if(item.has_method("player_take_damage")):
 				item.player_take_damage()
+	var part:GPUParticles2D = particle.instantiate()
+	get_parent().add_child(part)
+	part.position = position
+	part.emitting = true
 	queue_free()
 
 
